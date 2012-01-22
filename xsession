@@ -14,5 +14,5 @@ gnome-screensaver     &
 laptop-detect && gnome-power-manager &
 laptop-detect && nm-applet           &
 
-# Launch awesome window manager or xterm fallback :-)
-test -x $(which awesome) && exec awesome || exec xterm
+# Launch awesome window manager
+exec ck-launch-session dbus-launch awesome
