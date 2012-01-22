@@ -15,7 +15,7 @@ set nowritebackup
 set noswapfile
 set pastetoggle=<F10>
 
-colorscheme elflord
+colorscheme peachpuff
 
 " Avoid trailing spaces.
 highlight WhitespaceEOL ctermbg=red guibg=red
