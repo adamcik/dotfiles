@@ -1,0 +1,74 @@
+# Load more specific details from non public file:
+source ~/.muttrc.local
+
+# Common settings we want to change:
+set autoedit                    # Jump straight to editing message
+set bounce_delivered=no         # Don't remove delivered-to when bouncing
+set charset=utf-8               # utf-8 ftw :-)
+set copy=yes                    # Save outgoing mail.
+set delete=ask-yes              # Ask before deleting mail
+set edit_headers                # Allow me to change headers 
+set edit_headers                # Edit headers when writing emails
+set followup_to=no              # Don't set followup-to headers 
+set include=yes                 # Always quote mail
+set mail_check = 30             # How often to check for mail
+set pager_index_lines=6         # Number of index lines to show while reading mail
+set pager_stop=yes              # Don't skip to next when we get to end of a message
+set reverse_name                # Try to guess which address we should use for From: by using alternates
+set send_charset=utf-8          # utf-8 ftw :-)
+set sort=threads                # Sort by threads
+set sort_aux=last-date-received # Then by time
+set status_on_top               # Move status bar to top
+set strict_threads = "yes"      # Only group real threads, not stuff with same subject.
+set use_from                    # Set From: field
+
+# Formating of various visual items:
+set folder_format="%t%N  %2C %-30f %8s %d "                # endre hvordan folder-index'en ser ut :)
+set hdr_format="%4C %Z %{%b %d} %-15.15n (%4l) %s"         # hvordan linjene i meldings-index'en skal se ut.
+set pager_format="%S [%T] %n / %s"                         # hvordan bunn-linja skal se ut når du leser mail
+set status_format="-%r- %f %?n?[ New:%n ]?----%>-(%P)---"  # hvordan status-linjen i index-menyen skal se ut
+
+# Make tab go to unread messages, not just new ones:
+bind index   \t          next-unread
+bind pager   \t          next-unread
+bind index  ,\t      previous-unread
+bind pager  ,\t      previous-unread
+bind index  -        collapse-thread
+
+# Automatic viewing of html mail, but always prefer text/plain:
+set implicit_autoview
+alternative_order text/plain text/html
+
+# Override default colors so we get correct background:
+color normal     white      default
+color attachment green      default 
+color hdrdefault cyan       default
+color indicator  black      cyan
+color markers    brightred  default
+color quoted     green      default
+color signature  brightblue default 
+color status     white      blue
+color tilde      brightblue default
+color tree       red        default
+color quoted  	 green	    default
+
+# Ignore all headers and unignore the ones we care about:
+ignore *
+
+unignore From To Subject Delivery-date
+unignore Resent-To X-Spam-Score X-Spam-Report X-Spam-Folder 
+
+color header green default "From: "
+color header red default "To: "
+color header yellow default "Subject: "
+color header magenta default "Delivery-date: "
+
+# Colored smileys:
+color body yellow default "[;:=]-?[)/(|]"
+
+# Colored index:
+color index yellow   default  ~N  # New
+color index yellow   default  ~O  # Old, unread
+color index magenta  default  ~F  # Flaged
+color index blue     default  ~T  # Taged
+color index red      default  ~D  # Deleted

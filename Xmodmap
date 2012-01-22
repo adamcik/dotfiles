@@ -1,0 +1,6 @@
+! print=lower, screenlock=screensaver, pause=raise, caps=compose
+clear Lock
+keycode  78 = XF86ScreenSaver
+keycode 127 = XF86AudioRaiseVolume
+keycode 107 = XF86AudioLowerVolume
+keycode  66 = Multi_key
