@@ -4,7 +4,10 @@ let g:skip_pylint=0
 let g:skip_omni_complete=0
 
 " load per machine settings, missing file will be ignored.
-runtime ~/.vimrc.local
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
+
 
 syntax on
 filetype on
