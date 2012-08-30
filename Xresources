@@ -25,3 +25,7 @@
 URxvt.scrollstyle: plain
 URxvt.scrollColor: #2E3436
 URxvt.scrollBar_right: true
+
+! Dont use any extensions
+URxvt.perl-ext:
+URxvt.perl-ext-common:
