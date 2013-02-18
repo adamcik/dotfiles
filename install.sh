@@ -15,3 +15,11 @@ if [ -x $(which gconftool-2) ]; then
   gconftool-2 --type string --set /apps/gnome_settings_daemon/keybindings/volume_down XF86AudioLowerVolume
   gconftool-2 --type string --set /apps/gnome_settings_daemon/keybindings/volume_up   XF86AudioRaiseVolume
 fi
+
+echo Remeber to run: aptitude install awesome rxvt-unicode xfonts-terminus
+echo Also copy the following into /usr/share/xsessions/custom.desktop:
+cat << EOF
+[Desktop Entry]
+Name=Xsession
+Exec=/etc/X11/Xsession
+EOF
