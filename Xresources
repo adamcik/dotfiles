@@ -1,7 +1,7 @@
 ! color and font settings
 *background: black
 *foreground: grey90
-*faceName:   terminus:pixelsize=12
+*faceName:   terminus:pixelsize=13
 
 ! tango colors:
 *color0:  rgb:2e2e/3434/3636
