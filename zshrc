@@ -6,8 +6,13 @@ alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'
 alias ls='ls --color'
 
-# handy python/x11 hack to turn of caps once it has been remapped to compose
-export DISABLECAPS='from ctypes import *; X11 = cdll.LoadLibrary("libX11.so.6"); display = X11.XOpenDisplay(None); X11.XkbLockModifiers(display, c_uint(0x0100), c_uint(2), c_uint(0)); X11.XCloseDisplay(display)'
+function disable-caps {
+  python -c 'from ctypes import *; X11 = cdll.LoadLibrary("libX11.so.6"); display = X11.XOpenDisplay(None); X11.XkbLockModifiers(display, c_uint(0x0100), c_uint(2), c_uint(0)); X11.XCloseDisplay(display)'
+}
+
+function toggle-trackpad {
+  synclient TouchpadOff=$(synclient -l | grep TouchpadOff | awk '{print !$3}')
+}
 
 # Emacs-style commandline editing
 bindkey -e
