@@ -1,5 +1,3 @@
-export EDITOR=vim
-
 test -f ~/.zshrc.local && source ~/.zshrc.local
 
 # no spelling correction on:
@@ -7,6 +5,9 @@ alias mv='nocorrect mv'
 alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'
 alias ls='ls --color'
+
+# handy python/x11 hack to turn of caps once it has been remapped to compose
+export DISABLECAPS='from ctypes import *; X11 = cdll.LoadLibrary("libX11.so.6"); display = X11.XOpenDisplay(None); X11.XkbLockModifiers(display, c_uint(0x0100), c_uint(2), c_uint(0)); X11.XCloseDisplay(display)'
 
 # Emacs-style commandline editing
 bindkey -e
