@@ -1,8 +1,0 @@
-# Load defaults for locale:
-include "%L"
-
-# Add usefull shortcuts for Norwegians
-<Multi_key> <a> <a>              	: "å"   aring  # LATIN SMALL LETTER A WITH RING ABOVE
-<Multi_key> <A> <A>              	: "Å"   Aring  # LATIN CAPITAL LETTER A WITH RING ABOVE
-<Multi_key> <o> <slash>          	: "ø"   oslash # LATIN SMALL LETTER O WITH STROKE
-<Multi_key> <O> <slash>          	: "Ø"   Oslash # LATIN CAPITAL LETTER O WITH STROKE
