@@ -27,6 +27,7 @@ autocmd BufWinEnter * match WhitespaceEOL /\s\+$/
 if g:skip_language_settings==0
 	autocmd FileType c,cpp,slang set cindent
 	autocmd FileType c set formatoptions+=ro cindent
+	autocmd FileType c set ts=4 et shiftwidth=4
 	autocmd FileType perl set smartindent ts=4 et shiftwidth=4
 	autocmd FileType php set autoindent
 	autocmd FileType css set smartindent
