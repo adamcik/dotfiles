@@ -10,6 +10,9 @@ for file in profile muttrc vimrc zshrc Xresources; do
   test -f ~/.$file || ln -s $BASEDIR/$file ~/.$file
 done
 
+test -d ~/.ssh        || mkdir -p ~/.ssh
+test -f ~/.ssh/config || ln -s $BASEDIR/ssh_config ~/.ssh/config
+
 test -d ~/.config/i3        || mkdir -p ~/.config/i3
 test -f ~/.config/i3/config || ln -s $BASEDIR/i3.config ~/.config/i3/config
 

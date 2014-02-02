@@ -1,0 +1,4 @@
+Host *
+    ForwardAgent	no
+    ForwardX11		no
+    VisualHostKey	yes
