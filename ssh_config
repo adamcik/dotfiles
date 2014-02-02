@@ -2,3 +2,6 @@ Host *
     ForwardAgent	no
     ForwardX11		no
     VisualHostKey	yes
+
+Host sigma.1024.no
+    ForwardAgent	yes
