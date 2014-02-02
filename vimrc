@@ -43,6 +43,10 @@ highlight SpellRare term=underline cterm=underline
 highlight clear SpellLocal
 highlight SpellLocal term=underline cterm=underline
 
+" colorcolumn coloring
+highlight clear ColorColumn
+highlight ColorColumn ctermbg=0
+
 if g:skip_language_settings==0
 	autocmd FileType c,cpp,slang set cindent
 	autocmd FileType c set formatoptions+=ro cindent
@@ -54,7 +58,7 @@ if g:skip_language_settings==0
 	autocmd FileType css set noexpandtab tabstop=2
 	autocmd FileType make set noexpandtab shiftwidth=8
 	autocmd FileType xml set tabstop=2 expandtab
-	autocmd FileType python set ts=4 et shiftwidth=4
+	autocmd FileType python set ts=4 et shiftwidth=4 colorcolumn=80
 endif
 
 if g:skip_pylint==0
