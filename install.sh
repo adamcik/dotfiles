@@ -19,5 +19,5 @@ test -f ~/.config/i3/config || ln -s $BASEDIR/i3.config ~/.config/i3/config
 test -d ~/.config/i3status        || mkdir -p ~/.config/i3status
 test -f ~/.config/i3status/config || ln -s $BASEDIR/i3status.config ~/.config/i3status/config
 
-echo Remember to run: aptitude install ack-grep apt-file bind9-host build-essential dnsutils git ipython less mosh screen vim zsh
+echo Remember to run: aptitude install ack-grep apt-file bind9-host build-essential dnsutils git ipython keychain less mosh screen vim zsh
 echo Remember to run: aptitude install i3 rxvt-unicode xfonts-terminus redshift xautolock
