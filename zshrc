@@ -5,6 +5,7 @@ alias mv='nocorrect mv'
 alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'
 alias ls='ls --color'
+alias ack='ack-grep'
 
 # Emacs-style commandline editing
 bindkey -e
