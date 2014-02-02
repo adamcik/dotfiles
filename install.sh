@@ -3,6 +3,9 @@
 
 BASEDIR=$(readlink -m `dirname $0`)
 
+# Get rid of existing profile as we want our own.
+mv ~/.profile ~/.profile.bak
+
 for file in profile muttrc vimrc zshrc Xresources; do
   test -f ~/.$file || ln -s $BASEDIR/$file ~/.$file
 done
