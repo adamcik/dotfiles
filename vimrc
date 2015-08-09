@@ -62,6 +62,12 @@ if g:skip_language_settings==0
 	autocmd FileType xml setlocal tabstop=2 expandtab
 	autocmd FileType python setlocal ts=4 et shiftwidth=4 colorcolumn=80
 	autocmd FileType javascript setlocal ts=4 et shiftwidth=4 colorcolumn=80
+
+	augroup encrypted
+		au!
+		autocmd BufReadPre,FileReadPre	pass.* set viminfo=
+		autocmd BufReadPre,FileReadPre	pass.* set noswapfile
+	augroup END
 endif
 
 if g:skip_pylint==0
