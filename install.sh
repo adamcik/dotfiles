@@ -25,5 +25,5 @@ test -f ~/.gnupg/gpg-agent.conf || ln -s $BASEDIR/gpg-agent.conf ~/.gnupg/gpg-ag
 
 echo Remember to run: aptitude install ack-grep apt-file bind9-host build-essential dnsutils git ipython keychain less mosh screen vim zsh
 echo Remember to run: aptitude install i3 rxvt-unicode xfonts-terminus redshift xautolock
-echo Remember to run: aptitude install scdaemon gnupg2 gnupg-agent libccid pinentry-curses
+echo Remember to run: aptitude install scdaemon gnupg gnupg-agent libccid pinentry-curses gnupg-curl
 echo Remember to run: gsettings set org.gnome.settings-daemon.plugins.keyboard active false
