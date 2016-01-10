@@ -19,9 +19,10 @@ test -f ~/.config/i3/config || ln -s $BASEDIR/i3.config ~/.config/i3/config
 test -d ~/.config/i3status        || mkdir -p ~/.config/i3status
 test -f ~/.config/i3status/config || ln -s $BASEDIR/i3status.config ~/.config/i3status/config
 
-test -d ~/.gnupg/ || mkdir ~/.gnupg
+test -d ~/.gnupg/ || mkdir ~/.gnupg && chmod 700 ~/.gnupg
 test -f ~/.gnupg/gpg.conf || ln -s $BASEDIR/gpg.conf ~/.gnupg/gpg.conf
 test -f ~/.gnupg/gpg-agent.conf || ln -s $BASEDIR/gpg-agent.conf ~/.gnupg/gpg-agent.conf
+test -f ~/.gnupg/sks-keyservers.netCA.pem || ln -s $BASEDIR/sks-keyservers.netCA.pem ~/.gnupg/sks-keyservers.netCA.pem
 
 echo Remember to run: aptitude install ack-grep apt-file bind9-host build-essential dnsutils git ipython keychain less mosh screen vim zsh
 echo Remember to run: aptitude install i3 rxvt-unicode xfonts-terminus redshift xautolock
