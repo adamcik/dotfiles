@@ -30,3 +30,6 @@ URxvt.scrollBar_right: true
 ! Dont use any extensions
 URxvt.perl-ext:
 URxvt.perl-ext-common:
+
+! Chrome gets confused and gives you fuzzy text...
+Xft.dpi: 96
