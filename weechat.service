@@ -1,0 +1,16 @@
+# ~/.config/systemd/user/weechat.service
+# sudo loginctl enable-linger $(whoami)
+# systemctl --user enable weechat.service
+# systemctl --user start weechat.service
+
+[Unit]
+Description=Weechat IRC Client (in screen)
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/usr/bin/screen -S irc -d -m /usr/bin/weechat
+ExecStop=/usr/bin/screen -S irc -X quit
+
+[Install]
+WantedBy=default.target
