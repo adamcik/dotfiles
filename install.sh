@@ -29,5 +29,6 @@ echo Remember to run: aptitude install i3 rxvt-unicode redshift xss-lock xautolo
 echo Remember to run: aptitude install scdaemon gnupg gnupg-agent libccid pinentry-curses dbus-user-session
 echo Remember to run: gsettings set org.gnome.settings-daemon.plugins.keyboard active false
 echo Remember to run: 'gpg2 --card-status\n fetch\n^D; gpg2 --edit-key ...\ntrust\n5\n^D'
+echo Remember to run: dpkg-reconfigure locales
 
 echo And add '[Qt]\\nstyle=GTK+' to .config/Trolltech.conf
