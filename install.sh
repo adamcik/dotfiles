@@ -6,12 +6,14 @@ BASEDIR=$(readlink -m `dirname $0`)
 # Get rid of existing profile as we want our own.
 test -f ~/.profile && test -L ~/.profile || mv ~/.profile ~/.profile.bak
 
-for file in profile muttrc vimrc zshrc Xresources gitconfig; do
+for file in profile muttrc vimrc zshrc Xresources gitconfig screenrc; do
   test -f ~/.$file || ln -s $BASEDIR/$file ~/.$file
 done
 
 test -d ~/.ssh        || mkdir -p ~/.ssh
 test -f ~/.ssh/config || ln -s $BASEDIR/ssh_config ~/.ssh/config
+test -f ~/.ssh/rc     || ln -s $BASEDIR/ssh_rc ~/.ssh/rc
+test -f ~/.ssh/rc     || ln -s $BASEDIR/ssh_rc ~/.ssh/rc
 
 test -d ~/.config/i3        || mkdir -p ~/.config/i3
 test -f ~/.config/i3/config || ln -s $BASEDIR/i3.config ~/.config/i3/config
