@@ -1,8 +1,15 @@
 ! color and font settings
 *background: black
 *foreground: grey90
-*faceName:   terminus:pixelsize=13
-URxvt.font: xft:terminus:size=13
+
+!*faceName:   terminus:pixelsize=12
+!URxvt.font: xft:terminus:size=12
+
+!URxvt.lineSpace: -3
+!URxvt.letterSpace: -4
+
+
+URxvt.font:           xft:terminus:size=13
 
 ! tango colors:
 *color0:  rgb:2e2e/3434/3636
@@ -33,3 +40,4 @@ URxvt.perl-ext-common:
 
 ! Chrome gets confused and gives you fuzzy text...
 Xft.dpi: 96
+

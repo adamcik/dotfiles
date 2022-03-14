@@ -5,7 +5,7 @@ alias mv='nocorrect mv'
 alias cp='nocorrect cp'
 alias mkdir='nocorrect mkdir'
 alias ls='ls --color'
-alias ack='ack-grep'
+# alias ack='ack-grep'
 
 # Emacs-style commandline editing
 bindkey -e
@@ -33,6 +33,9 @@ export PROMPT="%j %{$fg[blue]%}%m%{$reset_color%}:%{$fg_bold[yellow]%}%30<..<%~%
 export HISTSIZE=1000000000
 export HISTFILE=~/.zsh_history
 export SAVEHIST=300000000
+
+precmd()   { print -Pn '\e]0;%(!.%n@.)%m: %~\a' }
+preexec () { print -Pn "\e]0;%(!.%n@.)%m: $1\a" }
 
 # Add a bunch of helpers if we are running in X.
 if [ -n "$DISPLAY" ]; then

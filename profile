@@ -6,3 +6,4 @@ export LANG=en_DK.utf8
 export GTK_IM_MODULE=xim
 
 test -f ~/.profile.local && source ~/.profile.local
+. "$HOME/.cargo/env"
