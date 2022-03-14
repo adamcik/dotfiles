@@ -2,14 +2,9 @@
 *background: black
 *foreground: grey90
 
-!*faceName:   terminus:pixelsize=12
-!URxvt.font: xft:terminus:size=12
+*faceName:   terminus:pixelsize=14
+URxvt.font: xft:terminus:size=14
 
-!URxvt.lineSpace: -3
-!URxvt.letterSpace: -4
-
-
-URxvt.font:           xft:terminus:size=13
 
 ! tango colors:
 *color0:  rgb:2e2e/3434/3636
