@@ -26,8 +26,11 @@ test -f ~/.gnupg/gpg.conf || ln -s $BASEDIR/gpg.conf ~/.gnupg/gpg.conf
 test -f ~/.gnupg/gpg-agent.conf || ln -s $BASEDIR/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 test -f ~/.gnupg/sks-keyservers.netCA.pem || ln -s $BASEDIR/sks-keyservers.netCA.pem ~/.gnupg/sks-keyservers.netCA.pem
 
+test -d ~/bin || mkdir ~/bin
+test -f ~/bin/input-event || ln -s $BASEDIR/input-event ~/bin/input-event
+
 echo Remember to run: aptitude install ack-grep bind9-host dnsutils git ipython less mosh screen vim zsh
-echo Remember to run: aptitude install i3 rxvt-unicode redshift xss-lock xautolock pavucontrol
+echo Remember to run: aptitude install i3 rxvt-unicode redshift xss-lock xautolock pavucontrol kitty inputplug
 echo Remember to run: aptitude install scdaemon gnupg gnupg-agent libccid pinentry-curses dbus-user-session
 echo Remember to run: gsettings set org.gnome.settings-daemon.plugins.keyboard active false
 echo Remember to run: 'gpg2 --card-status\n fetch\n^D; gpg2 --edit-key ...\ntrust\n5\n^D'
