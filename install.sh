@@ -29,8 +29,8 @@ test -f ~/.gnupg/gpg.conf || ln -s $BASEDIR/gpg.conf ~/.gnupg/gpg.conf
 test -f ~/.gnupg/gpg-agent.conf || ln -s $BASEDIR/gpg-agent.conf ~/.gnupg/gpg-agent.conf
 test -f ~/.gnupg/sks-keyservers.netCA.pem || ln -s $BASEDIR/sks-keyservers.netCA.pem ~/.gnupg/sks-keyservers.netCA.pem
 
-test -d ~/bin || mkdir ~/bin
-test -f ~/bin/input-event || ln -s $BASEDIR/input-event ~/bin/input-event
+test -d ~/.local/bin || mkdir ~/.local/bin
+test -f ~/.local/bin/input-event || ln -s $BASEDIR/input-event ~/.local/bin/input-event
 
 echo Remember to run: aptitude install ack-grep bind9-host dnsutils git ipython less mosh screen vim zsh
 echo Remember to run: aptitude install i3 kitty redshift xss-lock xautolock pavucontrol kitty inputplug
