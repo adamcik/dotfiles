@@ -15,6 +15,6 @@ printf "input-event: $use: [%3d] $event $name\n" $device
 set +x
 case "$event,$use,$(uname -n),$name" in
     *,XISlaveKeyboard,*)
-	setxkbmap -layout 'us(altgr-intl)' -option -option compose:rwin -option caps:hyper
+	setxkbmap -layout 'us(altgr-intl)' -option -option compose:menu -option caps:hyper
         ;;
 esac
