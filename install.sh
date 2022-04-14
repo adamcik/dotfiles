@@ -26,6 +26,7 @@ symlink ~/.config/fish/functions/fish_title.fish  fish_title
 symlink ~/.config/i3/config                       i3
 symlink ~/.config/i3status/config                 i3status
 symlink ~/.config/kitty/kitty.conf                kitty
+symlink ~/.config/systemd/weechat.service         weechat.service
 symlink ~/.gitconfig                              gitconfig
 symlink ~/.gnupg/gpg-agent.conf                   gpg-agent
 symlink ~/.gnupg/gpg.conf                         gpg
