@@ -22,7 +22,12 @@ set nowritebackup
 set noswapfile
 set pastetoggle=<F10>
 
-colorscheme peachpuff
+if (has('termguicolors'))
+  set termguicolors
+endif
+
+let g:material_theme_style = 'darker'
+colorscheme material
 
 " Avoid trailing spaces.
 highlight WhitespaceEOL ctermbg=red guibg=red
