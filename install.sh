@@ -8,15 +8,15 @@ test -f ~/.profile && test -L ~/.profile || mv ~/.profile ~/.profile.bak
 
 symlink() {
 test -d $(dirname $1) || mkdir -p $(dirname $1)
-test -L $1 || ln -s $BASEDIR/$2 $1
+test "$(readlink -m $1)" = "$BASEDIR/$2" || ln -nsf $BASEDIR/$2 $1
 }
 
-symlink ~/.config/i3/config       i3.config
-symlink ~/.config/i3status/config i3status.config
-symlink ~/.config/kitty/config    kitty.conf
+symlink ~/.config/i3/config       i3
+symlink ~/.config/i3status/config i3status
+symlink ~/.config/kitty/config    kitty
 symlink ~/.gitconfig              gitconfig
-symlink ~/.gnupg/gpg-agent.conf   gpg-agent.conf
-symlink ~/.gnupg/gpg.conf         gpg.conf
+symlink ~/.gnupg/gpg-agent.conf   gpg-agent
+symlink ~/.gnupg/gpg.conf         gpg
 symlink ~/.local/bin/input-event  input-event
 symlink ~/.muttrc                 muttrc
 symlink ~/.profile                profile
@@ -25,7 +25,7 @@ symlink ~/.ssh/config             ssh_config
 symlink ~/.ssh/rc                 ssh_rc
 symlink ~/.vimrc                  vimrc
 symlink ~/.zshrc                  zshrc
-symlink ~/.Xresources             Xresources
+symlink ~/.Xresources             xresources
 
 echo Remember to run: aptitude install ack-grep bind9-host dnsutils git ipython less mosh screen vim zsh
 echo Remember to run: aptitude install i3 kitty redshift xss-lock xautolock pavucontrol kitty inputplug
