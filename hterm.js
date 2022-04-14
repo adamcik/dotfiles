@@ -30,7 +30,7 @@ const hexToRGB = (hex, alpha=1.0) => {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-term_.setProfile('material-dark');
+term_.setProfile('default');
 
 term_.prefs_.set('background-color', data.background);
 term_.prefs_.set('foreground-color', data.foreground);
@@ -54,8 +54,8 @@ term_.prefs_.set('color-palette-overrides', [
 	data.color15   // brwhite
 ]);
 
-term_.prefs_.set('cursor-shape', 'BEAM');
-term_.prefs_.set('cursor-color', hexToRGB(data.selection_background, 0.1));
+term_.prefs_.set('cursor-shape', 'UNDERLINE');
+term_.prefs_.set('cursor-color', hexToRGB(data.selection_background, 0.5));
 
 term_.prefs_.set('user-css', 'https://fonts.googleapis.com/css2?family=Fira+Code');
 term_.prefs_.set('font-size', 12);
