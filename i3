@@ -11,26 +11,29 @@
 
 set $mod Mod4
 
-# Switch to us-intl with working altgr and caps as compose
-exec --no-startup-id setxkbmap -layout 'us(altgr-intl)' -option -option compose:caps
-
-# Load xresources changes.
-exec --no-startup-id test -f ~/.Xresources && xrdb -merge ~/.Xresources
+# What for keyboard input plug events so we can reapply settings.
+exec --no-startup-id inputplug -c ~/.local/bin/input-event -0
+# Remove hyper from mod4 and map to mod3 so we can use it for shortcuts
+exec --no-startup-id xmodmap -e "remove mod4 = Hyper_L" -e "add mod3 = Hyper_L" 
 
 # Setup screensaver locking
-exec --no-startup-id xautolock -time 5 -locker "xdg-screensaver activate"
+exec --no-startup-id xset s 300
+exec --no-startup-id xss-lock -l -- i3lock -c 555555 || xautolock -time 5 -locker "i3lock -c 555555"
 
 # Set background for root window.
-exec --no-startup-id xsetroot -solid black
+exec --no-startup-id xsetroot -solid "#555555"
 
 # Start redshift in auto mode and fallback to zurich
+# TODO: Switch to running via systemd?
 exec --no-startup-id redshift || redshift -l 47.22:8.33
 
 exec --no-startup-id laptop-detect && nm-applet
 exec --no-startup-id laptop-detect && synclient TouchpadOff=1
 
 # font for window titles. ISO 10646 = Unicode
-font pango:Ubuntu Mono 12
+# TODO: Not sure if this is installed on debian testing.
+#font pango:Ubuntu Mono 12
+font pango:Terminus 14px
 
 # Make sure steam client is forced into floating.
 for_window [class="Steam" instance="Steam"] floating enable
@@ -38,21 +41,32 @@ for_window [class="Steam" instance="Steam"] floating enable
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# some custom bindings for locking and volumes
-bindsym Ctrl+Mod1+L exec xdg-screensaver lock
+# trigger screensaver from shortcut.
+bindsym Ctrl+Mod1+L     exec xset s activate
+# bindsym $mod+L          exec xset s activate
+bindsym XF86ScreenSaver exec xset s activate
 
 # default volume handling for sensible systems
-bindsym XF86AudioMute        exec amixer -D pulse set Master toggle
-bindsym XF86AudioRaiseVolume exec amixer -D pulse set Master 3%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -D pulse set Master 3%- unmute
+bindsym XF86AudioMute        exec pactl -- set-sink-mute @DEFAULT_SINK@ toggle && killall -SIGUSR1 i3status
+bindsym XF86AudioRaiseVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ +3%  && killall -SIGUSR1 i3status
+bindsym XF86AudioLowerVolume exec pactl -- set-sink-volume @DEFAULT_SINK@ -3%  && killall -SIGUSR1 i3status
 
 # fallback for systems without volume keys.
-bindsym $mod+m      exec amixer -D pulse set Master toggle
-bindsym $mod+period exec amixer -D pulse set Master 3%+ unmute
-bindsym $mod+comma  exec amixer -D pulse set Master 3%- unmute
+bindsym $mod+m      exec pactl -- set-sink-mute @DEFAULT_SINK@ toggle && killall -SIGUSR1 i3status
+bindsym $mod+period exec pactl -- set-sink-volume @DEFAULT_SINK@ +3%  && killall -SIGUSR1 i3status
+bindsym $mod+comma  exec pactl -- set-sink-volume @DEFAULT_SINK@ -3%  && killall -SIGUSR1 i3status
+
+bindsym $mod+F8  exec pactl -- set-sink-mute @DEFAULT_SINK@ toggle && killall -SIGUSR1 i3status
+bindsym $mod+F10 exec pactl -- set-sink-volume @DEFAULT_SINK@ +3%  && killall -SIGUSR1 i3status
+bindsym $mod+F9  exec pactl -- set-sink-volume @DEFAULT_SINK@ -3%  && killall -SIGUSR1 i3status
+
+bindsym $mod+F6 exec ddcutil setvcp 10 - 10
+bindsym $mod+F7 exec ddcutil setvcp 10 + 10
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty || i3-sensible-terminal
+
+bindsym $mod+x exec /home/adamcik/bin/clicker.sh
 
 # kill focused window
 bindsym $mod+Shift+Q kill
@@ -109,6 +123,10 @@ bindsym $mod+a focus parent
 
 # focus the child container
 #bindcode $mod+d focus child
+
+# Switch workspaces like on chromeos
+bindsym Ctrl+Mod1+comma workspace prev
+bindsym Ctrl+Mod1+period workspace next
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -186,3 +204,4 @@ bindsym $mod+r mode "resize"
 bar {
         status_command i3status
 }
+

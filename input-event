@@ -1,0 +1,20 @@
+#!/bin/sh
+
+event="$1"
+device="$2"
+use="$3"
+name="$4"
+
+case $event in
+        XIDeviceDisabled) exit 0 ;;
+        XISlaveRemoved) exit 0 ;;
+esac
+
+printf "input-event: $use: [%3d] $event $name\n" $device
+
+set +x
+case "$event,$use,$(uname -n),$name" in
+    *,XISlaveKeyboard,*)
+	setxkbmap -layout 'us(altgr-intl)' -option -option compose:menu -option caps:hyper
+        ;;
+esac

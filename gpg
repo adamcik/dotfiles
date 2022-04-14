@@ -14,10 +14,10 @@ verify-options show-uid-validity
 
 use-agent
 
-keyserver hkps://hkps.pool.sks-keyservers.net
-keyserver-options ca-cert-file=/home/adamcik/.gnupg/sks-keyservers.netCA.pem
-keyserver-options no-honor-keyserver-url
-keyserver-options include-revoked
+#keyserver hkps://hkps.pool.sks-keyservers.net
+#keyserver-options ca-cert-file=/home/adamcik/.gnupg/sks-keyservers.netCA.pem
+#keyserver-options no-honor-keyserver-url
+#keyserver-options include-revoked
 #keyserver-options http-proxy=socks5-hostname://127.0.0.1:9050
 #keyserver-options no-try-dns-srv
 
