@@ -11,14 +11,16 @@ DIRECTORY=$(dirname $1)
 TARGET=$BASEDIR/$2
 LINK_NAME=$1
 test -d $DIRECTORY || mkdir -p $DIRECTORY
-printf "%-40s --> %s\n" $(realpath --relative-base=$HOME --no-symlinks $LINK_NAME) $(realpath --relative-base=$HOME $TARGET)
+printf "%-40s - %s\n" $(realpath --relative-base=$HOME --no-symlinks $LINK_NAME) $2
 ln -nsf $TARGET $LINK_NAME
 }
 
 echo Setting up links:
 echo
 
-symlink ~/.config/fish/fish.config                fish
+rm ~/.config/fish/fish.config
+
+symlink ~/.config/fish/config.fish                fish
 symlink ~/.config/fish/functions/fish_prompt.fish fish_prompt
 symlink ~/.config/fish/functions/fish_title.fish  fish_title
 symlink ~/.config/i3/config                       i3
@@ -43,13 +45,13 @@ chmod 700 ~/.ssh
 
 echo
 echo Remember to run:
-echo aptitude install ack-grep bind9-host dnsutils git ipython less mosh screen vim zsh
-echo aptitude install i3 kitty redshift xss-lock xautolock pavucontrol kitty inputplug
-echo aptitude install scdaemon gnupg gnupg-agent libccid pinentry-curses dbus-user-session
-echo gsettings set org.gnome.settings-daemon.plugins.keyboard active false
+echo
+echo apt install ack-grep bind9-host dnsutils git ipython3 less mosh screen vim zsh
+echo apt install i3 kitty redshift xss-lock xautolock pavucontrol kitty inputplug
+echo apt install scdaemon gnupg gnupg-agent libccid pinentry-curses dbus-user-session
 echo dpkg-reconfigure locales
 echo
-echo 'gpg2 --card-status\n fetch\n^D; gpg2 --edit-key ...\ntrust\n5\n^D'
+echo gsettings set org.gnome.settings-daemon.plugins.keyboard active false
 echo
-echo And add '[Qt]\\nstyle=GTK+' to .config/Trolltech.conf
+echo 'gpg2 --card-status\n fetch\n^D; gpg2 --edit-key ...\ntrust\n5\n^D'
 echo
