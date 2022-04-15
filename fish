@@ -1,3 +1,8 @@
+set EDITOR vim
+set LANG=en_DK.utf8
+set PATH ~/.local/bin $PATH
+set MOSH_SERVER_NETWORK_TMOUT 2592000
+
 set fish_greeting
 
 set fish_color_normal normal
