@@ -19,3 +19,5 @@ set fish_color_autosuggestion 555 brblack
 set fish_color_user brgreen
 set fish_color_host blue
 set fish_color_host_remote cyan
+
+set color_cwd yellow
