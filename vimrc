@@ -29,6 +29,10 @@ endif
 let g:material_theme_style = 'darker'
 colorscheme material
 
+" make select inside/around work for slash:
+onoremap <silent> i/ :<C-U>normal! T/vt/<CR>
+onoremap <silent> a/ :<C-U>normal! F/vf/<CR>
+
 " Avoid trailing spaces.
 highlight WhitespaceEOL ctermbg=red guibg=red
 autocmd BufWinEnter * match WhitespaceEOL /\s\+$/
