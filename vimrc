@@ -1,9 +1,6 @@
 " Control variables for skipping some setup, can be set from .local
 let g:skip_language_settings=0
-let g:skip_pylint=0
 let g:skip_omni_complete=0
-
-let g:syntastic_check_on_open=1
 
 " load per machine settings, missing file will be ignored.
 if filereadable(expand("~/.vimrc.local"))
@@ -77,14 +74,6 @@ if g:skip_language_settings==0
 		autocmd BufReadPre,FileReadPre	pass.* set viminfo=
 		autocmd BufReadPre,FileReadPre	pass.* set noswapfile
 	augroup END
-endif
-
-if g:skip_pylint==0
-	function! s:PyLint()
-	  let a:lint = 'pylint --output-format=parseable --include-ids=y'
-	  cexpr system(a:lint . ' ' . expand('%'))
-	endfunction
-	au FileType python command! Lint :call s:PyLint()
 endif
 
 if g:skip_omni_complete==0
