@@ -26,6 +26,7 @@ symlink ~/.profile                                profile
 symlink ~/.screenrc                               screenrc
 symlink ~/.ssh/config                             ssh_config
 symlink ~/.ssh/rc                                 ssh_rc
+symlink ~/.tmux.conf                              tmux
 symlink ~/.vimrc                                  vimrc
 symlink ~/.vim/colors/material.vim                vim_material
 symlink ~/.zshrc                                  zshrc
