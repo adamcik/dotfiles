@@ -41,14 +41,14 @@ echo $ dpkg-reconfigure locales
 echo
 
 if test -z "$SSH_TTY"; then
-echo Setting up local only links:
+echo Setting up local links:
 echo
 symlink ~/.config/i3/config        i3
 symlink ~/.config/i3status/config  i3status
 symlink ~/.config/kitty/kitty.conf kitty
 symlink ~/.gnupg/gpg-agent.conf    gpg-agent
 symlink ~/.gnupg/gpg.conf          gpg
-symlink ~/.local/bin/input-event   input-event
+symlink ~/.local/bin/input-event   bin/input-event
 symlink ~/.Xresources              xresources
 
 chmod 700 ~/.gnupg
