@@ -54,7 +54,7 @@ term_.prefs_.set('color-palette-overrides', [
 	data.color15   // brwhite
 ]);
 
-term_.pref_.set('audible-bell-sound', '');
+term_.prefs_.set('audible-bell-sound', '');
 
 term_.prefs_.set('cursor-shape', 'BEAM');
 term_.prefs_.set('cursor-color', hexToRGB(data.selection_background, 0.5));
