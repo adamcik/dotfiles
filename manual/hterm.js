@@ -54,7 +54,9 @@ term_.prefs_.set('color-palette-overrides', [
 	data.color15   // brwhite
 ]);
 
-term_.prefs_.set('cursor-shape', 'UNDERLINE');
+term_.pref_.set('audible-bell-sound', '');
+
+term_.prefs_.set('cursor-shape', 'BEAM');
 term_.prefs_.set('cursor-color', hexToRGB(data.selection_background, 0.5));
 
 term_.prefs_.set('user-css', 'https://fonts.googleapis.com/css2?family=Fira+Code');
