@@ -60,10 +60,10 @@ echo Setting up links:
 echo
 
 symlink ~/.config/fish/ ./fish/
+symlink ~/.config/jj/ ./jj/
 symlink ~/.ssh/ ./ssh/
 symlink ~/.vim/ ./vim/
 echo
-symlink ~/.config/jj/config.toml jj.toml
 symlink ~/.gitconfig ./gitconfig
 symlink ~/.profile ./profile
 symlink ~/.screenrc ./screenrc
@@ -101,17 +101,14 @@ echo
 if test -z "${SSH_TTY:-}"; then
 	echo Setting up local links:
 	echo
-	symlink ~/.config/i3/config ./i3
-	symlink ~/.config/i3status/config ./i3status
-	symlink ~/.config/kitty/kitty.conf ./kitty
+	symlink ~/.config/foot/ ./foot/
+	symlink ~/.config/i3/ ./i3/
+	symlink ~/.config/i3status/ ./i3status/
+	symlink ~/.config/kanshi/ ./kanshi/
+	symlink ~/.config/kitty/ ./kitty/
+	symlink ~/.config/sway/ ./sway/
+	symlink ~/.gnupg/ ./gnupg/
 	symlink ~/.Xresources ./xresources
-
-	symlink ~/.config/foot/foot.ini ./foot.ini
-	symlink ~/.config/kanshi/config ./kanshi
-	symlink ~/.config/sway/config ./sway
-
-	symlink ~/.gnupg/gpg-agent.conf ./gpg-agent
-	symlink ~/.gnupg/gpg.conf ./gpg
 
 	echo
 	echo Remember to run:
