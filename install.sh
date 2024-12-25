@@ -58,23 +58,20 @@ completion() {
 
 echo Setting up links:
 echo
-
 symlink ~/.config/fish/ ./fish/
 symlink ~/.config/jj/ ./jj/
-symlink ~/.ssh/ ./ssh/
-symlink ~/.vim/ ./vim/
-echo
 symlink ~/.gitconfig ./gitconfig
 symlink ~/.profile ./profile
 symlink ~/.screenrc ./screenrc
+symlink ~/.ssh/ ./ssh/
 symlink ~/.tmux.conf ./tmux
+symlink ~/.vim/ ./vim/
 symlink ~/.vimrc ./vimrc
 symlink ~/.zshrc ./zshrc
 
 echo
 echo Generating completions:
 echo
-
 completion av completion fish
 completion gh completion -s fish
 completion jj util completion fish
@@ -83,10 +80,7 @@ completion poetry completions fish
 echo
 echo Linking local bin:
 echo
-
-for file in ./bin/*; do
-	test -f "${file}" && symlink "${HOME}/.local/${file}" "${file}"
-done
+symlink ~/.local/bin/ ./bin/
 
 echo
 echo Remember to run:
