@@ -1,10 +1,13 @@
-#!/bin/sh
+#!/bin/bash
 # Install dotfiles as symlinks to this repo.
 
-BASEDIR=$(readlink -m $(dirname $0))
+# Private defaults and hardened bash
+set -o nounset
+set -o errexit
+set -o pipefail
+umask 077
 
-# Get rid of existing profile as we want our own.
-test -f ~/.profile && test -L ~/.profile || mv ~/.profile ~/.profile.bak
+BASEDIR="$(readlink -m "$(dirname "$0")")"
 
 symlink() {
 	DIRECTORY=$(dirname $1)
@@ -40,7 +43,7 @@ echo $ apt install ack-grep bind9-host dnsutils git ipython3 less mosh screen vi
 echo $ dpkg-reconfigure locales
 echo
 
-if test -z "$SSH_TTY"; then
+if test -z "${SSH_TTY:-}"; then
 	echo Setting up local links:
 	echo
 	symlink ~/.config/i3/config i3
@@ -61,8 +64,7 @@ if test -z "$SSH_TTY"; then
 	echo
 	echo $ gsettings set org.gnome.settings-daemon.plugins.keyboard active false
 	echo
-	echo $ gpg2 '--card-status\nfetch\n^D'
-	echo $ gpg2 '--edit-key ...\ntrust\n5\n^D'
+	printf "$ gpg2 --card-status\nfetch\n^D\n"
+	printf "$ gpg2 --edit-key ...\ntrust\n\n^D\n"
 	echo
-
 fi
