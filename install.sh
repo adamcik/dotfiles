@@ -82,6 +82,7 @@ if test -z "${SSH_TTY:-}"; then
 	symlink ~/.config/i3/config ./i3
 	symlink ~/.config/i3status/config ./i3status
 	symlink ~/.config/kitty/kitty.conf ./kitty
+	symlink ~/.config/kanshi/config ./kanshi
 	symlink ~/.gnupg/gpg-agent.conf ./gpg-agent
 	symlink ~/.gnupg/gpg.conf ./gpg
 	symlink ~/.local/bin/input-event ./bin/input-event
