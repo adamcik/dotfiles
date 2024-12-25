@@ -32,23 +32,23 @@ symlink() {
 
 completion() {
 	PROGRAM="$1"
-	printf "$ %-40s → ~/%s\n" \
-		"$*" ".config/fish/completions/${PROGRAM}.fish"
+	printf "$ %-40s → ~/%s\n" "$*" ".config/fish/completions/${PROGRAM}.fish"
 	type -p "${PROGRAM}" >/dev/null && "$@" >"${HOME}/.config/fish/completions/${PROGRAM}.fish"
 }
 
 echo Setting up links:
 echo
 
-for path in ./fish/**/* ./fish/*; do
-	test -f "${path}" && symlink "${HOME}/.config/${path}" "${path}"
+# Handle things going to ~/.config/${NAME}
+find ./fish -type f -print0 | while IFS= read -r -d '' file; do
+	symlink "${HOME}/.config/${file}" "${file}"
 done
+echo ""
 
-for path in ./vim/**/* ./vim/* ssh/*; do
-	target=$(realpath --relative-base="${BASEDIR}" "${path}")
-	test -f "${path}" && symlink "${HOME}/.${target}" "${path}"
+# Handle things going to ~/.${NAME}
+find ./ssh ./vim -type f -print0 | while IFS= read -r -d '' file; do
+	symlink "${HOME}/.$(realpath --relative-base="${BASEDIR}" "${file}")" "${file}"
 done
-
 echo ""
 
 symlink ~/.config/jj/config.toml jj.toml
@@ -58,8 +58,6 @@ symlink ~/.screenrc ./screenrc
 symlink ~/.tmux.conf ./tmux
 symlink ~/.vimrc ./vimrc
 symlink ~/.zshrc ./zshrc
-
-# TODO: Tokyo night for plain vim
 
 echo
 echo Generating completions:
