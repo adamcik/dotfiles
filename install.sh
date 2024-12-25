@@ -40,18 +40,22 @@ completion() {
 echo Setting up links:
 echo
 
-for file in ./fish/**/*; do
-	test -f "${file}" && symlink "${HOME}/.config/${file}" "${file}"
+for path in ./fish/**/* ./fish/*; do
+	test -f "${path}" && symlink "${HOME}/.config/${path}" "${path}"
 done
+
+for path in ./vim/**/* ./vim/* ssh/*; do
+	target=$(realpath --relative-base="${BASEDIR}" "${path}")
+	test -f "${path}" && symlink "${HOME}/.${target}" "${path}"
+done
+
+echo ""
 
 symlink ~/.config/jj/config.toml jj.toml
 symlink ~/.gitconfig ./gitconfig
 symlink ~/.profile ./profile
 symlink ~/.screenrc ./screenrc
-symlink ~/.ssh/config ./ssh_config
-symlink ~/.ssh/rc ./ssh_rc
 symlink ~/.tmux.conf ./tmux
-symlink ~/.vim/colors/material.vim ./vim_material
 symlink ~/.vimrc ./vimrc
 symlink ~/.zshrc ./zshrc
 
