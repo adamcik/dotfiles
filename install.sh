@@ -43,7 +43,6 @@ echo
 for file in ./fish/**/*; do
 	test -f "${file}" && symlink "${HOME}/.config/${file}" "${file}"
 done
-symlink ~/.config/foot/foot.ini ./foot.ini
 
 symlink ~/.gitconfig ./gitconfig
 symlink ~/.profile ./profile
@@ -67,6 +66,14 @@ completion jj util completion fish
 completion poetry completions fish
 
 echo
+echo Linking local bin:
+echo
+
+for file in ./bin/*; do
+	test -f "${file}" && symlink "${HOME}/.local/${file}" "${file}"
+done
+
+echo
 echo Remember to run:
 echo
 echo $ apt install ack-grep bind9-host dnsutils git ipython3 less mosh screen vim zsh
@@ -82,13 +89,14 @@ if test -z "${SSH_TTY:-}"; then
 	symlink ~/.config/i3/config ./i3
 	symlink ~/.config/i3status/config ./i3status
 	symlink ~/.config/kitty/kitty.conf ./kitty
-	symlink ~/.config/kanshi/config ./kanshi
-	symlink ~/.gnupg/gpg-agent.conf ./gpg-agent
-	symlink ~/.gnupg/gpg.conf ./gpg
-	symlink ~/.local/bin/input-event ./bin/input-event
 	symlink ~/.Xresources ./xresources
 
-	# TODO: Sway etc.
+	symlink ~/.config/foot/foot.ini ./foot.ini
+	symlink ~/.config/kanshi/config ./kanshi
+	symlink ~/.config/sway/config ./sway
+
+	symlink ~/.gnupg/gpg-agent.conf ./gpg-agent
+	symlink ~/.gnupg/gpg.conf ./gpg
 
 	echo
 	echo Remember to run:
