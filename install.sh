@@ -32,7 +32,6 @@ symlink() {
 
 completion() {
 	PROGRAM="$1"
-
 	printf "$ %-40s → ~/%s\n" \
 		"$*" ".config/fish/completions/${PROGRAM}.fish"
 	type -p "${PROGRAM}" >/dev/null && "$@" >"${HOME}/.config/fish/completions/${PROGRAM}.fish"
@@ -41,7 +40,7 @@ completion() {
 echo Setting up links:
 echo
 
-for file in ./fish/**/*; do
+for file in ./fish/**; do
 	test -f "${file}" && symlink "${HOME}/.config/${file}" "${file}"
 done
 
@@ -60,6 +59,7 @@ echo Generating completions:
 echo
 
 completion av completion fish
+completion gh completion -s fish
 completion jj util completion fish
 completion poetry completions fish
 
