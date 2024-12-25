@@ -3,3 +3,4 @@ default-cache-ttl 120
 default-cache-ttl-ssh 600
 max-cache-ttl 1200
 max-cache-ttl-ssh 3600
+use-standard-socket
