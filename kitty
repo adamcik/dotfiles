@@ -1,3 +1,5 @@
+# vim:ft=kitty
+
 font_family      Fira Code
 italic_font      Fira Code Italic
 font_size 11
@@ -6,23 +8,50 @@ disable_ligatures always
 enable_audio_bell no
 cursor_blink_interval 0
 
-background #212121
-foreground #eeffff
-color0 #2b2b2b
-color8 #404040
-color1 #f07178
-color9 #ff8b92
-color2 #c3e88d
-color10 #ddffa7
-color3 #ffcb6b
-color11 #ffe585
-color4 #82aaff
-color12 #9cc4ff
-color5 #c792ea
-color13 #e1acff
-color6 #89ddff
-color14 #a3f7ff
-color15 #ffffff
-selection_foreground #212121
-selection_background #eeffff
-cursor_text_color background
+## name: Tokyo Night
+## license: MIT
+## author: Folke Lemaitre
+## upstream: https://github.com/folke/tokyonight.nvim/raw/main/extras/kitty/tokyonight_night.conf
+
+background #1a1b26
+foreground #c0caf5
+selection_background #283457
+selection_foreground #c0caf5
+url_color #73daca
+cursor #c0caf5
+cursor_text_color #1a1b26
+
+# Tabs
+active_tab_background #7aa2f7
+active_tab_foreground #16161e
+inactive_tab_background #292e42
+inactive_tab_foreground #545c7e
+#tab_bar_background #15161e
+
+# Windows
+active_border_color #7aa2f7
+inactive_border_color #292e42
+
+# normal
+color0 #15161e
+color1 #f7768e
+color2 #9ece6a
+color3 #e0af68
+color4 #7aa2f7
+color5 #bb9af7
+color6 #7dcfff
+color7 #a9b1d6
+
+# bright
+color8  #414868
+color9  #ff899d
+color10 #9fe044
+color11 #faba4a
+color12 #8db0ff
+color13 #c7a9ff
+color14 #a4daff
+color15 #c0caf5
+
+# extended colors
+color16 #ff9e64
+color17 #db4b4b
