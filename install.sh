@@ -19,7 +19,7 @@ symlink() {
 	test -d "${DIRECTORY}" || mkdir -p "${DIRECTORY}"
 
 	# Backup before replacing:
-	if [ ! -L "${LINK_NAME}" ]; then
+	if [ ! -L "${LINK_NAME}" ] && [ -f "${LINK_NAME}" ]; then
 		diff -u "${LINK_NAME}" "${TARGET}" ||
 			${RUN} mv "${LINK_NAME}" "${LINK_NAME}.backup"
 	fi
