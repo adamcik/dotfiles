@@ -44,14 +44,15 @@ for file in ./fish/**/*; do
 	test -f "${file}" && symlink "${HOME}/.config/${file}" "${file}"
 done
 
+symlink ~/.config/jj/config.toml jj.toml
 symlink ~/.gitconfig ./gitconfig
 symlink ~/.profile ./profile
 symlink ~/.screenrc ./screenrc
 symlink ~/.ssh/config ./ssh_config
 symlink ~/.ssh/rc ./ssh_rc
 symlink ~/.tmux.conf ./tmux
-symlink ~/.vimrc ./vimrc
 symlink ~/.vim/colors/material.vim ./vim_material
+symlink ~/.vimrc ./vimrc
 symlink ~/.zshrc ./zshrc
 
 # TODO: Tokyo night for plain vim
