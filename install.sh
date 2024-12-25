@@ -7,16 +7,36 @@ set -o errexit
 set -o pipefail
 umask 077
 
-BASEDIR="$(readlink -m "$(dirname "$0")")"
+# TODO: Switch to more portable way of getting BASEDIR?
+BASEDIR="$(realpath "$(dirname "$0")")"
 RUN="" # Set to echo for dry run
 
 symlink() {
-	DIRECTORY="$(dirname "$1")"
-	TARGET="$(realpath --no-symlinks "${BASEDIR}/$2")"
-	LINK_NAME="$(realpath --no-symlinks "$1")"
+	if [ "$(expr "$(realpath "$2")" : "${BASEDIR}")" -eq 0 ]; then
+		echo "$2 ($(realpath "$1")) is not in ${BASEDIR}"
+		exit 1
+	fi
+
+	# TODO: Check that $2 is inside $BASEDIR
+	if [ -d "$2" ]; then
+		while IFS= read -d '' -r file; do
+			target="$(realpath --relative-base="${BASEDIR}" "${file}" | cut -d/ -f2-)"
+			_symlink \
+				"$(realpath --no-symlinks "$1/${target}")" \
+				"$(realpath --no-symlinks "${file}")"
+		done < <(find "$2" -type f -print0)
+	else
+		_symlink "$1" "$(realpath --no-symlinks "${BASEDIR}/$2")"
+	fi
+}
+
+_symlink() {
+	LINK_NAME="$1"
+	TARGET="$2"
+	DIRECTORY="$(dirname "${LINK_NAME}")"
 
 	# Create directory if missing:
-	test -d "${DIRECTORY}" || mkdir -p "${DIRECTORY}"
+	test -d "${DIRECTORY}" || ${RUN} mkdir -p "${DIRECTORY}"
 
 	# Backup before replacing:
 	if [ ! -L "${LINK_NAME}" ] && [ -f "${LINK_NAME}" ]; then
@@ -39,18 +59,10 @@ completion() {
 echo Setting up links:
 echo
 
-# Handle things going to ~/.config/${NAME}
-find ./fish -type f -print0 | while IFS= read -r -d '' file; do
-	symlink "${HOME}/.config/${file}" "${file}"
-done
-echo ""
-
-# Handle things going to ~/.${NAME}
-find ./ssh ./vim -type f -print0 | while IFS= read -r -d '' file; do
-	symlink "${HOME}/.$(realpath --relative-base="${BASEDIR}" "${file}")" "${file}"
-done
-echo ""
-
+symlink ~/.config/fish/ ./fish/
+symlink ~/.ssh/ ./ssh/
+symlink ~/.vim/ ./vim/
+echo
 symlink ~/.config/jj/config.toml jj.toml
 symlink ~/.gitconfig ./gitconfig
 symlink ~/.profile ./profile
