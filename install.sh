@@ -50,14 +50,16 @@ _symlink() {
 	${RUN} ln --no-dereference --symbolic --force "${TARGET}" "${LINK_NAME}"
 }
 
-completion() {
-	PROGRAM="$1"
-	printf "$ %-40s → ~/%s\n" "$*" ".config/fish/completions/${PROGRAM}.fish"
-	type -p "${PROGRAM}" >/dev/null && "$@" >"${HOME}/.config/fish/completions/${PROGRAM}.fish"
+generate() {
+	TARGET="$(realpath "$1")"
+	shift
+	if type -p "$1" >/dev/null; then
+		printf "$ %-40s → ~/%s\n" "$*" "$(realpath --relative-base="${HOME}" "${TARGET}")"
+		"$@" >"${TARGET}"
+	fi
 }
 
 echo Setting up links:
-echo
 symlink ~/.config/fish/ ./fish/
 symlink ~/.config/jj/ ./jj/
 symlink ~/.gitconfig ./gitconfig
@@ -71,15 +73,17 @@ symlink ~/.zshrc ./zshrc
 
 echo
 echo Generating completions:
+generate ~/.config/fish/completions/av.fish av completion fish
+generate ~/.config/fish/completions/gh.fish gh completion -s fish
+generate ~/.config/fish/completions/jj.fish jj util completion fish
+generate ~/.config/fish/completions/poetry.fish poetry completions fish
+
 echo
-completion av completion fish
-completion gh completion -s fish
-completion jj util completion fish
-completion poetry completions fish
+echo Generating config:
+generate ~/.config/fish/conf.d/mise.fish mise activate fish
 
 echo
 echo Linking local bin:
-echo
 symlink ~/.local/bin/ ./bin/
 
 echo
@@ -94,7 +98,6 @@ echo
 
 if test -z "${SSH_TTY:-}"; then
 	echo Setting up local links:
-	echo
 	symlink ~/.config/foot/ ./foot/
 	symlink ~/.config/i3/ ./i3/
 	symlink ~/.config/i3status/ ./i3status/
@@ -118,5 +121,6 @@ if test -z "${SSH_TTY:-}"; then
 	echo
 fi
 
+echo "Making sure .ssh and .gnupg are private."
 ${RUN} chmod 700 ~/.ssh
 ${RUN} chmod 700 ~/.gnupg
