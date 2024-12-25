@@ -40,9 +40,10 @@ completion() {
 echo Setting up links:
 echo
 
-for file in ./fish/**; do
+for file in ./fish/**/*; do
 	test -f "${file}" && symlink "${HOME}/.config/${file}" "${file}"
 done
+symlink ~/.config/foot/foot.ini ./foot.ini
 
 symlink ~/.gitconfig ./gitconfig
 symlink ~/.profile ./profile
