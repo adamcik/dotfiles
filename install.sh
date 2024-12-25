@@ -55,6 +55,8 @@ symlink ~/.vimrc ./vimrc
 symlink ~/.vim/colors/material.vim ./vim_material
 symlink ~/.zshrc ./zshrc
 
+# TODO: Tokyo night for plain vim
+
 echo
 echo Generating completions:
 echo
@@ -67,9 +69,12 @@ completion poetry completions fish
 echo
 echo Remember to run:
 echo
-echo $ apt install ack-grep bind9-host dnsutils git ipython3 less mosh screen vim zsh tmux
+echo $ apt install ack-grep bind9-host dnsutils git ipython3 less mosh screen vim zsh
+echo $ apt install fish tmux neovim ripgrep
 echo $ dpkg-reconfigure locales
 echo
+
+# TODO: mise
 
 if test -z "${SSH_TTY:-}"; then
 	echo Setting up local links:
@@ -82,16 +87,19 @@ if test -z "${SSH_TTY:-}"; then
 	symlink ~/.local/bin/input-event ./bin/input-event
 	symlink ~/.Xresources ./xresources
 
+	# TODO: Sway etc.
+
 	echo
 	echo Remember to run:
 	echo
 	echo $ apt install i3 kitty redshift xss-lock xautolock pavucontrol kitty inputplug
+	echo $ apt install sway waybar foot swayidle fonts-firacode light kanshi ddcutil
 	echo $ apt install scdaemon gnupg gnupg-agent libccid pinentry-curses dbus-user-session
 	echo
 	echo $ gsettings set org.gnome.settings-daemon.plugins.keyboard active false
 	echo
-	printf "$ gpg2 --card-status\nfetch\n^D\n"
-	printf "$ gpg2 --edit-key ...\ntrust\n\n^D\n"
+	printf "$ gpg2 --edit-card\nfetch\n^D\n"
+	printf "$ gpg2 --edit-key 9714F97B0CBEE929\ntrust\n^D\n"
 	echo
 fi
 
