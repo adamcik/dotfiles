@@ -23,8 +23,10 @@ symlink() {
 		${RUN} rm "${LINK_NAME}.backup"
 
 	# Backup before replacing:
-	test -L "${LINK_NAME}" ||
-		${RUN} mv "${LINK_NAME}" "${LINK_NAME}.backup"
+	if [ ! -L "${LINK_NAME}" ]; then
+		diff -u "${LINK_NAME}" "${TARGET}" ||
+			${RUN} mv "${LINK_NAME}" "${LINK_NAME}.backup"
+	fi
 
 	printf "~/%-40s → ~/%s\n" \
 		"$(realpath --relative-base="$HOME" --no-symlinks "${LINK_NAME}")" \
@@ -35,9 +37,10 @@ symlink() {
 echo Setting up links:
 echo
 
-symlink ~/.config/fish/config.fish ./fish
-symlink ~/.config/fish/functions/fish_prompt.fish ./fish_prompt
-symlink ~/.config/fish/functions/fish_title.fish ./fish_title
+for file in ./fish/**/*; do
+	test -f "${file}" && symlink "${HOME}/.config/${file}" "${file}"
+done
+
 symlink ~/.gitconfig ./gitconfig
 symlink ~/.profile ./profile
 symlink ~/.screenrc ./screenrc
