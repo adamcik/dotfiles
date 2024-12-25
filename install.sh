@@ -18,10 +18,6 @@ symlink() {
 	# Create directory if missing:
 	test -d "${DIRECTORY}" || mkdir -p "${DIRECTORY}"
 
-	# Remove stray backup:
-	test -L "${LINK_NAME}.backup" -a "$(readlink "${LINK_NAME}.backup")" = "$(readlink "${LINK_NAME}")" &&
-		${RUN} rm "${LINK_NAME}.backup"
-
 	# Backup before replacing:
 	if [ ! -L "${LINK_NAME}" ]; then
 		diff -u "${LINK_NAME}" "${TARGET}" ||
