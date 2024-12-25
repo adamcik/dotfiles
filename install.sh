@@ -10,12 +10,18 @@ umask 077
 BASEDIR="$(readlink -m "$(dirname "$0")")"
 
 symlink() {
-	DIRECTORY=$(dirname $1)
-	TARGET=$BASEDIR/$2
-	LINK_NAME=$1
-	test -d $DIRECTORY || mkdir -p $DIRECTORY
-	printf "%-40s → %s\n" $(realpath --relative-base=$HOME --no-symlinks $LINK_NAME) $2
-	ln -nsf $TARGET $LINK_NAME
+	DIRECTORY="$(dirname "$1")"
+	TARGET="$BASEDIR/$2"
+	LINK_NAME="$1"
+	# Create directory if missing:
+	test -d "$DIRECTORY" || mkdir -p "$DIRECTORY"
+
+	# Remove stray backup:
+	test -e "${LINK_NAME}.backup" -a "$(readlink "${LINK_NAME}.backup")" = "$(readlink "$TARGET")" &&
+		rm "${LINK_NAME}.backup"
+
+	printf "%-40s → %s\n" "$(realpath --relative-base="$HOME" --no-symlinks "$LINK_NAME")" "$2"
+	ln --no-dereference --symbolic --force "$TARGET" "$LINK_NAME"
 }
 
 echo Setting up links:
