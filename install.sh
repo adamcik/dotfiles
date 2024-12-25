@@ -30,6 +30,14 @@ symlink() {
 	${RUN} ln --no-dereference --symbolic --force "${TARGET}" "${LINK_NAME}"
 }
 
+completion() {
+	PROGRAM="$1"
+
+	printf "$ %-40s → ~/%s\n" \
+		"$*" ".config/fish/completions/${PROGRAM}.fish"
+	type -p "${PROGRAM}" >/dev/null && "$@" >"${HOME}/.config/fish/completions/${PROGRAM}.fish"
+}
+
 echo Setting up links:
 echo
 
@@ -47,8 +55,13 @@ symlink ~/.vimrc ./vimrc
 symlink ~/.vim/colors/material.vim ./vim_material
 symlink ~/.zshrc ./zshrc
 
-${RUN} chmod 700 ~/.ssh
-${RUN} chmod 700 ~/.gnupg
+echo
+echo Generating completions:
+echo
+
+completion av completion fish
+completion jj util completion fish
+completion poetry completions fish
 
 echo
 echo Remember to run:
@@ -80,3 +93,6 @@ if test -z "${SSH_TTY:-}"; then
 	printf "$ gpg2 --edit-key ...\ntrust\n\n^D\n"
 	echo
 fi
+
+${RUN} chmod 700 ~/.ssh
+${RUN} chmod 700 ~/.gnupg
