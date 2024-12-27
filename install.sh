@@ -79,10 +79,6 @@ generate ~/.config/fish/completions/jj.fish jj util completion fish
 generate ~/.config/fish/completions/poetry.fish poetry completions fish
 
 echo
-echo Generating config:
-generate ~/.config/fish/conf.d/mise.fish mise activate fish
-
-echo
 echo Linking local bin:
 symlink ~/.local/bin/ ./bin/
 
