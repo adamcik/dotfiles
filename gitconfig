@@ -8,9 +8,6 @@ signingkey = BFD4 7D24 FBFD 2692 1058 0923 9714 F97B 0CBE E929
 [commit]
 ; gpgsign = true
 
-[core]
-editor = vim
-
 [init]
 defaultBranch = main
 
