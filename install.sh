@@ -17,7 +17,7 @@ symlink() {
     exit 1
   fi
 
-  # TODO: Check that $2 is inside $BASEDIR
+  # TODO: Check for dangling symlinks for directory linking?
   if [ -d "$2" ]; then
     while IFS= read -d '' -r file; do
       target="$(realpath --relative-base="${BASEDIR}" "${file}" | cut -d/ -f2-)"
