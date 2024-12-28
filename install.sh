@@ -30,6 +30,7 @@ symlink() {
 	fi
 }
 
+# FIXME: It seems things fail if we try and copy a .config/$DIR/ that does not exist
 _symlink() {
 	LINK_NAME="$1"
 	TARGET="$2"
