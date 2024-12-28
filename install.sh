@@ -12,51 +12,51 @@ BASEDIR="$(realpath "$(dirname "$0")")"
 RUN="" # Set to echo for dry run
 
 symlink() {
-	if [ "$(expr "$(realpath "$2")" : "${BASEDIR}")" -eq 0 ]; then
-		echo "$2 ($(realpath "$1")) is not in ${BASEDIR}"
-		exit 1
-	fi
+  if [ "$(expr "$(realpath "$2")" : "${BASEDIR}")" -eq 0 ]; then
+    echo "$2 ($(realpath "$1")) is not in ${BASEDIR}"
+    exit 1
+  fi
 
-	# TODO: Check that $2 is inside $BASEDIR
-	if [ -d "$2" ]; then
-		while IFS= read -d '' -r file; do
-			target="$(realpath --relative-base="${BASEDIR}" "${file}" | cut -d/ -f2-)"
-			_symlink \
-				"$(realpath --no-symlinks "$1/${target}")" \
-				"$(realpath --no-symlinks "${file}")"
-		done < <(find "$2" -type f -print0)
-	else
-		_symlink "$1" "$(realpath --no-symlinks "${BASEDIR}/$2")"
-	fi
+  # TODO: Check that $2 is inside $BASEDIR
+  if [ -d "$2" ]; then
+    while IFS= read -d '' -r file; do
+      target="$(realpath --relative-base="${BASEDIR}" "${file}" | cut -d/ -f2-)"
+      _symlink \
+        "$(realpath --no-symlinks "$1/${target}")" \
+        "$(realpath --no-symlinks "${file}")"
+    done < <(find "$2" -type f -print0)
+  else
+    _symlink "$1" "$(realpath --no-symlinks "${BASEDIR}/$2")"
+  fi
 }
 
 _symlink() {
-	LINK_NAME="$1"
-	TARGET="$2"
-	DIRECTORY="$(dirname "${LINK_NAME}")"
+  LINK_NAME="$1"
+  TARGET="$2"
+  DIRECTORY="$(dirname "${LINK_NAME}")"
 
-	# Create directory if missing:
-	test -d "${DIRECTORY}" || ${RUN} mkdir -p "${DIRECTORY}"
+  # Create directory if missing:
+  test -d "${DIRECTORY}" || ${RUN} mkdir -p "${DIRECTORY}"
 
-	# Backup before replacing:
-	if [ ! -L "${LINK_NAME}" ] && [ -f "${LINK_NAME}" ]; then
-		diff -u "${LINK_NAME}" "${TARGET}" ||
-			${RUN} mv "${LINK_NAME}" "${LINK_NAME}.backup"
-	fi
+  # Backup before replacing:
+  if [ ! -L "${LINK_NAME}" ] && [ -f "${LINK_NAME}" ]; then
+    diff -u "${LINK_NAME}" "${TARGET}" ||
+      ${RUN} mv "${LINK_NAME}" "${LINK_NAME}.backup"
+  fi
 
-	printf "~/%-40s → ~/%s\n" \
-		"$(realpath --relative-base="$HOME" --no-symlinks "${LINK_NAME}")" \
-		"$(realpath --relative-base="$HOME" --no-symlinks "${TARGET}")"
-	${RUN} ln --no-dereference --symbolic --force "${TARGET}" "${LINK_NAME}"
+  printf "~/%-40s → ~/%s\n" \
+    "$(realpath --relative-base="$HOME" --no-symlinks "${LINK_NAME}")" \
+    "$(realpath --relative-base="$HOME" --no-symlinks "${TARGET}")"
+  ${RUN} ln --no-dereference --symbolic --force "${TARGET}" "${LINK_NAME}"
 }
 
 generate() {
-	TARGET="$(realpath "$1")"
-	shift
-	if type -p "$1" >/dev/null; then
-		printf "$ %-40s → ~/%s\n" "$*" "$(realpath --relative-base="${HOME}" "${TARGET}")"
-		"$@" >"${TARGET}"
-	fi
+  TARGET="$(realpath "$1")"
+  shift
+  if type -p "$1" >/dev/null; then
+    printf "$ %-40s → ~/%s\n" "$*" "$(realpath --relative-base="${HOME}" "${TARGET}")"
+    "$@" >"${TARGET}"
+  fi
 }
 
 echo Setting up links:
@@ -94,28 +94,28 @@ echo
 # TODO: mise
 
 if test -z "${SSH_TTY:-}"; then
-	echo Setting up local links:
-	symlink ~/.config/foot/ ./foot/
-	symlink ~/.config/i3/ ./i3/
-	symlink ~/.config/i3status/ ./i3status/
-	symlink ~/.config/kanshi/ ./kanshi/
-	symlink ~/.config/kitty/ ./kitty/
-	symlink ~/.config/sway/ ./sway/
-	symlink ~/.gnupg/ ./gnupg/
-	symlink ~/.Xresources ./xresources
+  echo Setting up local links:
+  symlink ~/.config/foot/ ./foot/
+  symlink ~/.config/i3/ ./i3/
+  symlink ~/.config/i3status/ ./i3status/
+  symlink ~/.config/kanshi/ ./kanshi/
+  symlink ~/.config/kitty/ ./kitty/
+  symlink ~/.config/sway/ ./sway/
+  symlink ~/.gnupg/ ./gnupg/
+  symlink ~/.Xresources ./xresources
 
-	echo
-	echo Remember to run:
-	echo
-	echo $ apt install i3 kitty redshift xss-lock xautolock pavucontrol kitty inputplug
-	echo $ apt install sway waybar foot swayidle fonts-firacode light kanshi ddcutil
-	echo $ apt install scdaemon gnupg gnupg-agent libccid pinentry-curses dbus-user-session
-	echo
-	echo $ gsettings set org.gnome.settings-daemon.plugins.keyboard active false
-	echo
-	printf "$ gpg2 --edit-card\nfetch\n^D\n"
-	printf "$ gpg2 --edit-key 9714F97B0CBEE929\ntrust\n^D\n"
-	echo
+  echo
+  echo Remember to run:
+  echo
+  echo $ apt install i3 kitty redshift xss-lock xautolock pavucontrol kitty inputplug
+  echo $ apt install sway waybar foot swayidle fonts-firacode light kanshi ddcutil
+  echo $ apt install scdaemon gnupg gnupg-agent libccid pinentry-curses dbus-user-session
+  echo
+  echo $ gsettings set org.gnome.settings-daemon.plugins.keyboard active false
+  echo
+  printf "$ gpg2 --edit-card\nfetch\n^D\n"
+  printf "$ gpg2 --edit-key 9714F97B0CBEE929\ntrust\n^D\n"
+  echo
 fi
 
 echo "Making sure .ssh and .gnupg are private."
