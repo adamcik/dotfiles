@@ -22,5 +22,3 @@ set fish_color_host blue
 set fish_color_host_remote cyan
 
 set color_cwd yellow
-
-eval (direnv hook fish)
