@@ -30,34 +30,38 @@ const hexToRGB = (hex, alpha=1.0) => {
   return `rgba(${r}, ${g}, ${b}, ${alpha})`;
 }
 
-term_.setProfile('default');
+['default', 'mosh'].forEach(profile => {
+	term_.setProfile(profile);
 
-term_.prefs_.set('background-color', data.background);
-term_.prefs_.set('foreground-color', data.foreground);
+	term_.prefs_.set('background-color', data.background);
+	term_.prefs_.set('foreground-color', data.foreground);
 
-term_.prefs_.set('color-palette-overrides', [
-	data.color0,   // black
-	data.color1,   // red
-	data.color2,   // green
-	data.color3,   // yellow
-	data.color4,   // blue
-	data.color5,   // magenta
-	data.color6,   // cyan
-	data.color7,   // white
-	data.color8,   // brblack
-	data.color9,   // brred
-	data.color10,  // brgreen
-	data.color11,  // bryellow
-	data.color12,  // brblue
-	data.color13,  // brmagenta
-	data.color14,  // brcyan
-	data.color15   // brwhite
-]);
+	term_.prefs_.set('color-palette-overrides', [
+		data.color0,   // black
+		data.color1,   // red
+		data.color2,   // green
+		data.color3,   // yellow
+		data.color4,   // blue
+		data.color5,   // magenta
+		data.color6,   // cyan
+		data.color7,   // white
+		data.color8,   // brblack
+		data.color9,   // brred
+		data.color10,  // brgreen
+		data.color11,  // bryellow
+		data.color12,  // brblue
+		data.color13,  // brmagenta
+		data.color14,  // brcyan
+		data.color15   // brwhite
+	]);
 
-term_.prefs_.set('cursor-shape', 'UNDERLINE');
-term_.prefs_.set('cursor-color', hexToRGB(data.selection_background, 0.5));
+	term_.prefs_.set('audible-bell-sound', '');
 
-term_.prefs_.set('user-css', 'https://fonts.googleapis.com/css2?family=Fira+Code');
-term_.prefs_.set('font-size', 12);
-term_.prefs_.set('font-smoothing', 'subpixel-antialiased');
-term_.prefs_.set('font-family', "'Fira Code', monospace;");
+	term_.prefs_.set('cursor-shape', 'BEAM');
+	term_.prefs_.set('cursor-color', hexToRGB(data.selection_background, 0.5));
+
+	term_.prefs_.set('user-css', 'https://fonts.googleapis.com/css2?family=Fira+Code');
+	term_.prefs_.set('font-size', 12);
+	term_.prefs_.set('font-smoothing', 'subpixel-antialiased');
+	term_.prefs_.set('font-family', "'Fira Code', monospace;");	
+});

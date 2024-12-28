@@ -1,3 +1,24 @@
+# vim: set ft=gitconfig
+
 [user]
-        email = thomas@adamcik.no
-	name = "Thomas Adamcik"
+email = thomas@adamcik.no
+name = "Thomas Adamcik"
+signingkey = BFD4 7D24 FBFD 2692 1058 0923 9714 F97B 0CBE E929
+
+[commit]
+; gpgsign = true
+
+[init]
+defaultBranch = main
+
+[push]
+autoSetupRemote = true
+
+[credential "https://github.com"]
+helper = !gh auth git-credential
+
+[credential "https://gist.github.com"]
+helper = !gh auth git-credential
+
+[include]
+path = ~/.config/git/local.config

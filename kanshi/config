@@ -1,0 +1,17 @@
+profile home {
+	output "LG Electronics LG Ultra HD 0x000651F3" scale 1.5 position 0,0 mode 3840x2160@30Hz
+	output "eDP-1" enable scale 1.5 position 320,1440 mode 2880x1800@120Hz
+}
+
+profile work {
+	output "Lenovo Group Limited L32p-30 U5120FCC" scale 1.3 position 0,0 mode 3840x2160@60Hz
+	# x = ((width / scale) - (width / scale)) / 2
+	# y = height / scale
+	output "eDP-1" enable scale 1.5 position 517,1662 mode 2880x1800@120Hz
+}
+
+
+profile laptop {
+	output eDP-1 enable scale 1.5 mode 2880x1800@120Hz
+}
+

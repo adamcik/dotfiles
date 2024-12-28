@@ -31,8 +31,7 @@ if &term =~ '256color'
   endif
 endif
 
-let g:material_theme_style = 'darker'
-colorscheme material
+colorscheme tokyonight
 
 " make select inside/around work for slash:
 onoremap <silent> i/ :<C-U>normal! T/vt/<CR>

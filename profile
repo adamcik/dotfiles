@@ -10,4 +10,4 @@ export PATH=~/.local/bin:$PATH
 
 test -f ~/.profile.local && source ~/.profile.local
 
-. "$HOME/.cargo/env"
+test -f ~/.cargo/env && source ~/.cargo/env
