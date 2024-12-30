@@ -1,2 +1,5 @@
 # Only alias if configured
-test -d ~/.config/nvim/ && alias vim=nvim
+if test -d ~/.config/nvim/
+  alias vim=nvim
+  set --export EDITOR nvim
+end

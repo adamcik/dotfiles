@@ -1,8 +1,8 @@
-set EDITOR vim
-set LANG en_DK.utf8
-set PATH ~/.local/bin $PATH
-set MOSH_SERVER_NETWORK_TMOUT 2592000
-set PYTHON_KEYRING_BACKEND keyring.backends.null.Keyring
+set --export EDITOR vim
+set --export LANG en_DK.utf8
+set --export PATH ~/.local/bin $PATH
+set --export MOSH_SERVER_NETWORK_TMOUT 2592000
+set --export PYTHON_KEYRING_BACKEND keyring.backends.null.Keyring
 
 set fish_greeting
 
@@ -22,5 +22,3 @@ set fish_color_host blue
 set fish_color_host_remote cyan
 
 set color_cwd yellow
-
-eval (direnv hook fish)
