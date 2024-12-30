@@ -93,6 +93,7 @@ echo
 
 # TODO: mise
 
+# FIXME: It seems this check breaks inside my tmux
 if test -z "${SSH_TTY:-}"; then
 	echo Setting up local links:
 	symlink ~/.config/foot/ ./foot/
