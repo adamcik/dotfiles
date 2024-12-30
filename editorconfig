@@ -14,9 +14,13 @@ indent_size = 4
 [*.md]
 max_line_length = 80
 
-
 [Makefile]
 indent_style = tab
+tab_width = 4
+
+[Caddyfile]
+indent_style = tab
+tab_width = 4
 
 [*.lua]
 # see https://github.com/CppCXY/EmmyLuaCodeStyle
