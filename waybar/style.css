@@ -54,6 +54,16 @@
     font-size: 13px;
 }
 
+/* Menus */
+menu {
+    background: #323232;
+    color: white;
+    font-family: Cantarell, Noto Sans, sans-serif;
+    font-size: 13px;
+}
+menuitem {
+}
+
 /* Each module */
 #backlight
 #battery,
