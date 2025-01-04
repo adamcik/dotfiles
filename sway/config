@@ -49,8 +49,19 @@ include /etc/sway/config-vars.d/*
     # Reload the configuration file
     bindsym $mod+Shift+c reload
 
-    # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    set $mode_system system (e)xit, (s)leep, (r)eboot, (p)oweroff
+    mode "$mode_system" {
+        bindsym e exec swaymsg exit, mode "default"
+        bindsym r exec systemctl reboot, mode "default"
+        bindsym p exec systemctl poweroff, mode "default"
+        bindsym s exec systemctl suspend, mode "default"
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
+    bindsym $mod+shift+e mode "$mode_system"
+
 #
 # Moving around:
 #
