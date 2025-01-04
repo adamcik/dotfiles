@@ -6,7 +6,22 @@ set $right l
 
 set $term foot
 
-set $menu dmenu_path | wmenu | xargs swaymsg exec --
+set $menu dmenu_path | bemenu \
+  -H 30 \
+  -p '' \
+  --hp 5 \
+  --nb '#323232' \
+  --ab '#323232' \
+  --nf '#c0caf5' \
+  --af '#a9b1d6' \
+  --fb '#323232' \
+  --hb '#323232' \
+  --hf '#c53b53' \
+  --cf '#FFFFFF' \
+  --cw 1 \
+  --ch 16 \
+  --ff '#ffc777' \
+  | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
 
