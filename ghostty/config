@@ -1,0 +1,12 @@
+gtk-tabs-location = hidden
+window-decoration = false
+
+font-family = FiraCode Nerd Font Ret
+font-size = 12
+
+theme = tokyonight_night
+
+scrollback-limit = 10_000
+
+clipboard-read = allow
+clipboard-paste-protection = false
