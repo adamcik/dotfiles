@@ -68,9 +68,9 @@
             "critical": 15
         },
         // Connected to AC
-        "format": "  {capacity}%", // Icon: bolt
+        "format": " {capacity}%", // Icon: bolt
         // Not connected to AC
-        "format-discharging": "{icon}  {capacity}%",
+        "format-discharging": "{icon} {capacity}%",
         "format-icons": [
             "", // Icon: battery-full
             "", // Icon: battery-three-quarters
@@ -83,7 +83,7 @@
 
     "clock": {
       // TODO: Show alternate timezones?
-      "format": "{:%Y-%m-%d  %H:%M}",
+      "format": "{:%Y-%m-%d %H:%M}",
       "tooltip-format": "<tt>{calendar}</tt>",
       "calendar": {
         "mode"          : "month",
@@ -103,7 +103,7 @@
 
     "cpu": {
         "interval": 5,
-        "format": "    {usage}% ({load})", // Icon: microchip
+        "format": " {usage}% ({load})", // Icon: microchip
         "states": {
           "warning": 70,
           "critical": 90
@@ -112,7 +112,7 @@
 
     "memory": {
         "interval": 5,
-        "format": "  {}%", // Icon: memory
+        "format": " {}%", // Icon: memory
         "states": {
             "warning": 70,
             "critical": 90
@@ -121,14 +121,14 @@
 
     "network": {
         "interval": 5,
-        "format-wifi": "    {essid} ({signalStrength}%)", // Icon: wifi
-        "format-ethernet": "    {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
-        "format-disconnected": "⚠    Disconnected",
+        "format-wifi": " {essid} ({signalStrength}%)", // Icon: wifi
+        "format-ethernet": " {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
+        "format-disconnected": "⚠ Disconnected",
         "tooltip-format": "{ifname}: {ipaddr}"
     },
 
     "sway/mode": {
-        "format": "<span style=\"italic\">  {}</span>", // Icon: expand-arrows-alt
+        "format": "<span style=\"italic\"> {}</span>", // Icon: expand-arrows-alt
         "tooltip": false
     },
 
@@ -172,14 +172,14 @@
 
     // TODO: Add ddcutil variant
     "backlight": {
-      "format": "{icon}  {percent}%",
+      "format": "{icon} {percent}%",
       "format-icons": ["", "", "", "", "", "", "", "", "" ]
     },
 
     "temperature": {
       "critical-threshold": 80,
       "interval": 5,
-      "format": "{icon}  {temperatureC}°C",
+      "format": "{icon} {temperatureC}°C",
       "format-icons": [
           "", // Icon: temperature-empty
           "", // Icon: temperature-quarter
@@ -209,9 +209,9 @@
     },
 
     "bluetooth": {
-        "format": "  {status}",
-        "format-connected": "  {device_alias}",
-        "format-connected-battery": "  {device_alias} {device_battery_percentage}%",
+        "format": " {status}",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
         // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
         "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
         "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",

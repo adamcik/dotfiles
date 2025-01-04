@@ -46,24 +46,15 @@
     padding: 0;
 }
 
-/* The whole bar */
+/* The whole bar + menus */
+menu,
 #waybar {
     background: #323232;
     color: white;
-    font-family: Cantarell, Noto Sans, sans-serif;
+    font-family: Fira Code, Noto Sans, sans-serif;
     font-size: 13px;
 }
 
-/* Menus */
-menu {
-    background: #323232;
-    color: white;
-    font-family: Cantarell, Noto Sans, sans-serif;
-    font-size: 13px;
-}
-menuitem {
-    padding: 7px 0;
-}
 
 /* Each module */
 #backlight
