@@ -206,12 +206,12 @@ bindsym --locked ctrl+alt+XF86MonBrightnessUp exec ddcutil setvcp 10 100
 
 bindsym ctrl+alt+l exec swaylock
 
+# TODO: See if we can trigger reload of e.g. kanshi service on reload?
+exec ~/.local/bin/sway-session
+
 exec swayidle -w \
     timeout 300 'light -S 5' resume 'light -I' \
     timeout 360 'swaylock --daemonize' \
     timeout 420 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
     timeout 900 'systemctl suspend-then-hibernate' \
     before-sleep 'swaylock --daemonize'
-
-# TODO: See if we can trigger reload of e.g. kanshi service on reload?
-exec /home/thomas/.local/bin/sway-session
