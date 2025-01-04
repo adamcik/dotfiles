@@ -10,8 +10,7 @@ profile work {
 	output "eDP-1" enable scale 1.5 position 517,1662 mode 2880x1800@120Hz
 }
 
-
 profile laptop {
-	output eDP-1 enable scale 1.5 mode 2880x1800@120Hz
+	output eDP-1 enable scale 1.5 mode 2880x1800
 }
 

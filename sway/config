@@ -10,7 +10,6 @@ set $menu dmenu_path | wmenu | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
 
-
 ### Key bindings
 #
 # Basics:
@@ -155,8 +154,8 @@ input "*" {
 }
 
 bar {
+     swaybar_command waybar
 }
-
 
 bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
 bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
@@ -184,14 +183,4 @@ exec swayidle -w \
     timeout 900 'systemctl suspend-then-hibernate' \
     before-sleep 'swaylock --daemonize'
 
-# exec waybar
-# exec_always systemctl --user start sway-session.target
-
 exec /home/thomas/.local/bin/sway-session
-
-# exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
-# exec hash dbus-update-activation-environment 2>/dev/null && \
-#         dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
-#
-# exec "systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK; systemctl --user start sway-session.target"
-# exec swaymsg -t subscribe '["shutdown"]' && systemctl --user stop sway-session.target
