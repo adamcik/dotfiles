@@ -62,13 +62,16 @@ menu {
     font-size: 13px;
 }
 menuitem {
+    padding: 7px 0;
 }
 
 /* Each module */
 #backlight
 #battery,
+#bluetooth,
 #clock,
 #cpu,
+#custom-power,
 #memory,
 #mode,
 #network,
