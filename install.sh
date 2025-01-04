@@ -63,6 +63,7 @@ generate() {
 echo Setting up links:
 symlink ~/.config/fish/ ./fish/
 symlink ~/.config/jj/ ./jj/
+symlink ~/.config/waybar/ ./waybar/
 symlink ~/.editorconfig ./editorconfig
 symlink ~/.gitconfig ./gitconfig
 symlink ~/.profile ./profile
