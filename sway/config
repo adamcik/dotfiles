@@ -176,7 +176,7 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
-font pango:Fira Code 8
+font pango:Fira Code 10
 
 input "*" {
     xkb_layout us
