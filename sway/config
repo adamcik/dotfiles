@@ -25,6 +25,7 @@ set $menu dmenu_path | bemenu \
   | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
+include /etc/sway/config.d/*
 
 ### Key bindings
 #
