@@ -10,3 +10,8 @@ scrollback-limit = 10_000
 
 clipboard-read = allow
 clipboard-paste-protection = false
+
+cursor-style-blink = false
+cursor-style = bar
+
+font-feature = -calt
