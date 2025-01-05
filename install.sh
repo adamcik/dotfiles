@@ -62,9 +62,7 @@ generate() {
 
 echo Setting up links:
 symlink ~/.config/fish/ ./fish/
-symlink ~/.config/ghostty/ ./ghostty/
 symlink ~/.config/jj/ ./jj/
-symlink ~/.config/waybar/ ./waybar/
 symlink ~/.editorconfig ./editorconfig
 symlink ~/.gitconfig ./gitconfig
 symlink ~/.profile ./profile
@@ -98,21 +96,31 @@ echo
 
 # FIXME: It seems this check breaks inside my tmux
 if test -z "${SSH_TTY:-}"; then
-  echo Setting up local links:
+  echo Setting up desktop links:
   symlink ~/.config/foot/ ./foot/
+  symlink ~/.config/ghostty/ ./ghostty/
   symlink ~/.config/i3/ ./i3/
   symlink ~/.config/i3status/ ./i3status/
   symlink ~/.config/kanshi/ ./kanshi/
   symlink ~/.config/kitty/ ./kitty/
   symlink ~/.config/sway/ ./sway/
-  symlink ~/.gnupg/ ./gnupg/
+  symlink ~/.config/way-displays/ ./way-displays/
+  symlink ~/.config/waybar/ ./waybar/
   symlink ~/.Xresources ./xresources
+
+  # Only setup gpg on local desktops
+  symlink ~/.gnupg/ ./gnupg/
+
+  # TODO: Is inputplug needed with sway?
+  # TODO: Clean out unused tools?
+  # TODO: Consider tpm/yubikey specific agents?
 
   echo
   echo Remember to run:
   echo
   echo $ apt install i3 kitty redshift xss-lock xautolock pavucontrol kitty inputplug
   echo $ apt install sway waybar foot swayidle fonts-firacode light kanshi ddcutil
+  echo $ apt install ghostty way-displays gammastep
   echo $ apt install scdaemon gnupg gnupg-agent libccid pinentry-curses dbus-user-session
   echo
   echo $ gsettings set org.gnome.settings-daemon.plugins.keyboard active false
