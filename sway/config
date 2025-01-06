@@ -176,6 +176,22 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+for_window [window_type="dialog"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_role="pop[_-]up"] floating enable
+for_window [window_role="pop[_-]up" title="^Meet - ([a-z-]+)"] sticky enable
+
+# TODO: Consider assign to workspace based on type etc?
+# - work/personal browser
+# - work/personal chat
+
+# TODO: Exec these at startup?
+# TODO: Chrome wrapper:
+#   - Handle one data-dir per name/profile
+#   - Set class based on name
+#   - xdg-open desktop entry picking name and calling wrapper
+#   - delete default data dir for chrome
+
 font pango:Fira Code 10
 
 input "*" {
