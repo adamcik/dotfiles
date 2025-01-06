@@ -178,8 +178,7 @@ bindsym $mod+r mode "resize"
 
 for_window [window_type="dialog"] floating enable
 for_window [window_role="dialog"] floating enable
-for_window [window_role="pop[_-]up"] floating enable
-for_window [window_role="pop[_-]up" title="^Meet - ([a-z-]+)"] sticky enable
+for_window [window_role="pop[_-]up" title="^Meet - ([a-z-]+)"] sticky enable floating enable
 
 # TODO: Consider assign to workspace based on type etc?
 # - work/personal browser
