@@ -7,21 +7,21 @@ set $right l
 set $term ghostty || foot
 
 set $menu dmenu_path | bemenu \
+  -p 'run' \
   -H 30 \
-  -p '' \
   --hp 5 \
-  -fn  'Fira Code 12' \
-  --nb '#323232' \
-  --ab '#323232' \
-  --nf '#888888' \
-  --af '#888888' \
-  --fb '#323232' \
-  --hb '#323232' \
-  --hf '#ff757f' \
-  --cf '#FFFFFF' \
   --cw 1 \
   --ch 16 \
+  -fn  'Fira Code 12' \
+  --af '#888888' \
   --ff '#888888' \
+  --nf '#888888' \
+  --ab '#323232' \
+  --fb '#323232' \
+  --hb '#323232' \
+  --nb '#323232' \
+  --hf '#ff757f' \
+  --cf '#FFFFFF' \
   | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
