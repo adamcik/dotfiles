@@ -104,6 +104,7 @@ if test -z "${SSH_TTY:-}"; then
   symlink ~/.config/kanshi/ ./kanshi/
   symlink ~/.config/kitty/ ./kitty/
   symlink ~/.config/sway/ ./sway/
+  symlink ~/.config/swaync/ ./swaync/
   symlink ~/.config/way-displays/ ./way-displays/
   symlink ~/.config/waybar/ ./waybar/
   symlink ~/.Xresources ./xresources
