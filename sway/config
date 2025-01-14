@@ -176,9 +176,22 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
 for_window [window_type="dialog"] floating enable
-for_window [window_role="dialog"] floating enable
-for_window [window_role="pop[_-]up" title="^Meet - ([a-z-]+)"] sticky enable floating enable
+for_window [window_type="menu"] floating enable
+for_window [instance="update_installer"] floating enable
+
+for_window [window_role="GtkFileChooserDialog"] resize set 800 600
+for_window [window_role="GtkFiileChooserDialog"] move position center
+
+for_window [window_role="pop-up" title="^Meet - "] sticky enable
+for_window [window_role="pop-up" title="^Meet - "] inhibit_idle open
+
+# assign [class="chrome-work"] ...
+# assign [class="chrome-personal"] ...
 
 # TODO: Consider assign to workspace based on type etc?
 # - work/personal browser
@@ -199,7 +212,7 @@ input "*" {
 }
 
 bar {
-     swaybar_command waybar
+     # swaybar_command waybar
 }
 
 bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
@@ -224,6 +237,7 @@ bindsym ctrl+alt+l exec swaylock
 # TODO: See if we can trigger reload of e.g. kanshi service on reload?
 exec ~/.local/bin/sway-session
 
+# TODO: run this from systemctl session?
 exec swayidle -w \
     timeout 300 'light -S 5' resume 'light -I' \
     timeout 360 'swaylock --daemonize' \

@@ -1,6 +1,7 @@
 set -g default-terminal 'tmux-256color'
 set -ga terminal-overrides ',tmux-255color:Tc'
 
+set -g update-environment "SSH_ASKPASS SSH_AGENT_PID SSH_CONNECTION SSH_TTY"
 setenv -g SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
 
 # TokyoNight colors for Tmux
