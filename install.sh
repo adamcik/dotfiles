@@ -48,7 +48,7 @@ _symlink() {
       ${RUN} mv "${LINK_NAME}" "${LINK_NAME}.backup"
   fi
 
-  printf "~/%-40s → ~/%s\n" \
+  printf "~/%-50s → ~/%s\n" \
     "$(realpath --relative-base="$HOME" --no-symlinks "${LINK_NAME}")" \
     "$(realpath --relative-base="$HOME" --no-symlinks "${TARGET}")"
   ${RUN} ln --no-dereference --symbolic --force "${TARGET}" "${LINK_NAME}"
@@ -58,7 +58,7 @@ generate() {
   TARGET="$(realpath "$1")"
   shift
   if type -p "$1" >/dev/null; then
-    printf "$ %-40s → ~/%s\n" "$*" "$(realpath --relative-base="${HOME}" "${TARGET}")"
+    printf "$ %-50s → ~/%s\n" "$*" "$(realpath --relative-base="${HOME}" "${TARGET}")"
     "$@" >"${TARGET}"
   fi
 }
