@@ -1,3 +1,4 @@
+// vim: ft=jsonc
 // =============================================================================
 //
 // Waybar configuration
@@ -5,219 +6,243 @@
 // Configuration reference: https://github.com/Alexays/Waybar/wiki/Configuration
 //
 // =============================================================================
-
 {
-    // -------------------------------------------------------------------------
-    // Global configuration
-    // -------------------------------------------------------------------------
-
-    "layer": "top",
-
-    "position": "top",
-
-    // If height property would be not present, it'd be calculated dynamically
-    "height": 30,
-
-    "fixed-center": false,
-
-    "modules-left": [
-        "sway/mode",
-        "sway/workspaces",
-    ],
-    "modules-center": [
-        "sway/window"
-    ],
-    "modules-right": [
-        "bluetooth",
-        "network",
-        "memory",
-        "cpu",
-        "temperature",
-        "battery",
-        "pulseaudio",
-        "backlight",
-        "clock",
-        "systemd-failed-units",
-        "idle_inhibitor",
-        "tray",
-    ],
-
-    // -------------------------------------------------------------------------
-    // Modules
-    // -------------------------------------------------------------------------
-
-    "systemd-failed-units": {
-        "hide-on-ok": false, // Do not hide if there is zero failed units.
-        "format": "✗ {nr_failed}",
-        "format-ok": "✓",
-        "system": true, // Monitor failed systemwide units.
-        "user":  true // Ignore failed user units.
+  // -------------------------------------------------------------------------
+  // Global configuration
+  // -------------------------------------------------------------------------
+  "layer": "top",
+  "position": "top",
+  // If height property would be not present, it'd be calculated dynamically
+  "height": 30,
+  "fixed-center": false,
+  "modules-left": [
+    "sway/mode",
+    "sway/workspaces"
+  ],
+  "modules-center": [
+    "sway/window"
+  ],
+  "modules-right": [
+    "bluetooth",
+    "network",
+    "memory",
+    "cpu",
+    "temperature",
+    "battery",
+    "pulseaudio",
+    "backlight",
+    "clock#calendar",
+    "clock#clock",
+    "systemd-failed-units",
+    "idle_inhibitor",
+    "custom/notification",
+    "tray"
+  ],
+  // -------------------------------------------------------------------------
+  // Modules
+  // -------------------------------------------------------------------------
+  "systemd-failed-units": {
+    "hide-on-ok": false, // Do not hide if there is zero failed units.
+    "format": "✗ {nr_failed}",
+    "format-ok": "✓",
+    "system": true, // Monitor failed systemwide units.
+    "user": true // Ignore failed user units.
+  },
+  "idle_inhibitor": {
+    "format": "{icon}",
+    "format-icons": {
+      "activated": "",
+      "deactivated": ""
+    }
+  },
+  "battery": {
+    "interval": 10,
+    "states": {
+      "warning": 30,
+      "critical": 15
     },
-
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-
-    "battery": {
-        "interval": 10,
-        "states": {
-            "warning": 30,
-            "critical": 15
-        },
-        // Connected to AC
-        "format": "\udb85\udc25 {capacity}%", // Icon: plug
-        // Not connected to AC
-        "format-discharging": "{icon} {capacity}%",
-        "format-icons": [
-            "", // Icon: battery-full
-            "", // Icon: battery-three-quarters
-            "", // Icon: battery-half
-            "", // Icon: battery-quarter
-            ""  // Icon: battery-empty
-        ],
-        "tooltip": true
-    },
-
-    "clock": {
-      // TODO: Show alternate timezones?
-      "format": "{:%Y-%m-%d %H:%M}",
-      "tooltip-format": "<tt>{calendar}</tt>",
-      "calendar": {
-        "mode"          : "month",
-        "mode-mon-col"  : 3,
-        "weeks-pos"     : "left",
-        "on-scroll"     : 1,
-        "format": {
-          "weeks":      "<span color='#c3e88d'>W{}</span>",
-          "weekdays":   "<span color='#ffc777'>{}</span>",
-          "today":      "<span color='#c53b53'><b>{}</b></span>"
-        }
-      },
-      "actions":  {
-        "on-click-right": "mode",
+    // Connected to AC
+    "format": "\udb85\udc25 {capacity}%", // Icon: plug
+    // Not connected to AC
+    "format-discharging": "{icon} {capacity}%",
+    "format-icons": [
+      "", // Icon: battery-full
+      "", // Icon: battery-three-quarters
+      "", // Icon: battery-half
+      "", // Icon: battery-quarter
+      "" // Icon: battery-empty
+    ],
+    "tooltip": true
+  },
+  "clock#calendar": {
+    "format": "{:%Y-%m-%d W%W}",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "left",
+      "on-scroll": 1,
+      "format": {
+        "weeks": "<span color='#c3e88d'>W{}</span>",
+        "weekdays": "<span color='#ffc777'>{}</span>",
+        "today": "<span color='#c53b53'><b>{}</b></span>"
       }
     },
-
-    "cpu": {
-        "interval": 5,
-        "format": " {usage}% ({load})", // Icon: microchip
-        "states": {
-          "warning": 70,
-          "critical": 90
-        }
-    },
-
-    "memory": {
-        "interval": 5,
-        "format": " {}%", // Icon: memory
-        "states": {
-            "warning": 70,
-            "critical": 90
-        }
-    },
-
-    "network": {
-        "interval": 5,
-        "format-wifi": " {essid} ({signalStrength}%)", // Icon: wifi
-        "format-ethernet": " {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
-        "format-disconnected": "⚠ Disconnected",
-        "tooltip-format": "{ifname}: {ipaddr}"
-    },
-
-    "sway/mode": {
-        "format": "<span style=\"italic\"> {}</span>", // Icon: expand-arrows-alt
-        "tooltip": false
-    },
-
-    "sway/window": {
-        "format": "{}",
-        "max-length": 120
-    },
-
-    "sway/workspaces": {
-        "all-outputs": false,
-        "disable-scroll": true,
-        "format": "{name}",
-        "format-icons": {
-            "1:www": "龜", // Icon: firefox-browser
-            "2:mail": "", // Icon: mail
-            "3:editor": "", // Icon: code
-            "4:terminals": "", // Icon: terminal
-            "5:portal": "", // Icon: terminal
-            "urgent": "",
-            "focused": "",
-            "default": ""
-        }
-    },
-
-    "pulseaudio": {
-        //"scroll-step": 1,
-        "format": "{icon} {volume}%",
-        "format-bluetooth": "{icon} {volume}%",
-        "format-muted": "\udb83\ude08 0%",
-        "format-icons": {
-            "headphones": "",
-            "handsfree": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", ""]
-        },
-        "on-click": "pavucontrol"
-    },
-
-    // TODO: Add ddcutil variant
-    "backlight": {
-      "format": "{icon} {percent}%",
-      "format-icons": ["", "", "", "", "", "", "", "", "" ]
-    },
-
-    "temperature": {
-      "critical-threshold": 80,
-      "interval": 5,
-      "format": "{icon} {temperatureC}°C",
-      "format-icons": [
-          "", // Icon: temperature-empty
-          "", // Icon: temperature-quarter
-          "", // Icon: temperature-half
-          "", // Icon: temperature-three-quarters
-          ""  // Icon: temperature-full
-      ],
-      "tooltip": true
-    },
-
-    "tray": {
-        "icon-size": 21,
-        "spacing": 10
-    },
-
-    "custom/power": {
-        "format" : "⏻ ",
-        "tooltip": false,
-        "menu": "on-click",
-        "menu-file": "~/.config/waybar/power_menu.xml",
-        "menu-actions": {
-          "shutdown": "shutdown",
-          "reboot": "reboot",
-          "suspend": "systemctl suspend",
-          "hibernate": "systemctl hibernate",
-        },
-    },
-
-    "bluetooth": {
-        "format": " {status}",
-        "format-connected": " {device_alias}",
-        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
-        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+    "actions": {
+      "on-click-right": "mode"
     }
-
+  },
+  "clock#clock": {
+    "format": "{:%H:%M %Z}",
+    "tooltip-format": "<tt>{tz_list}</tt>",
+    "timezones": [
+      "",
+      // "Australia/Sydney",
+      "UTC",
+      "Europe/Berlin",
+      "America/New_York",
+      "America/Chicago",
+      "America/Los_Angeles"
+    ]
+  },
+  "cpu": {
+    "interval": 5,
+    "format": " {usage}% ({load})", // Icon: microchip
+    "states": {
+      "warning": 70,
+      "critical": 90
+    }
+  },
+  "memory": {
+    "interval": 5,
+    "format": " {}%", // Icon: memory
+    "states": {
+      "warning": 70,
+      "critical": 90
+    }
+  },
+  "network": {
+    "interval": 5,
+    "format-wifi": " {essid} ({signalStrength}%)", // Icon: wifi
+    "format-ethernet": " {ifname}: {ipaddr}/{cidr}", // Icon: ethernet
+    "format-disconnected": "⚠ Disconnected",
+    "tooltip-format": "{ifname}: {ipaddr}"
+  },
+  "sway/mode": {
+    "format": "<span style=\"italic\"> {}</span>", // Icon: expand-arrows-alt
+    "tooltip": false
+  },
+  "sway/window": {
+    "format": "{}",
+    "max-length": 120
+  },
+  "sway/workspaces": {
+    "all-outputs": false,
+    "disable-scroll": true,
+    "format": "{name}",
+    "format-icons": {
+      "1:www": "龜", // Icon: firefox-browser
+      "2:mail": "", // Icon: mail
+      "3:editor": "", // Icon: code
+      "4:terminals": "", // Icon: terminal
+      "urgent": "",
+      "focused": "",
+      "default": ""
+    }
+  },
+  "pulseaudio": {
+    //"scroll-step": 1,
+    "format": "{icon} {volume}%",
+    "format-bluetooth": "{icon} {volume}%",
+    "format-muted": "\udb83\ude08 0%",
+    "format-icons": {
+      "headphones": "",
+      "handsfree": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": [
+        "",
+        ""
+      ]
+    },
+    "on-click": "pavucontrol"
+  },
+  // TODO: Add ddcutil variant
+  "backlight": {
+    "format": "{icon} {percent}%",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "interval": 5,
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": [
+      "", // Icon: temperature-empty
+      "", // Icon: temperature-quarter
+      "", // Icon: temperature-half
+      "", // Icon: temperature-three-quarters
+      "" // Icon: temperature-full
+    ],
+    "tooltip": true
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  },
+  "custom/power": {
+    "format": "⏻ ",
+    "tooltip": false,
+    "menu": "on-click",
+    "menu-file": "~/.config/waybar/power_menu.xml",
+    "menu-actions": {
+      "shutdown": "shutdown",
+      "reboot": "reboot",
+      "suspend": "systemctl suspend",
+      "hibernate": "systemctl hibernate",
+    },
+  },
+  "bluetooth": {
+    "format": " {status}",
+    "format-disabled": " off",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "rfkill toggle bluetooth"
+  },
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='red'><sup></sup></span>",
+      "none": "",
+      "dnd-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-none": "",
+      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "inhibited-none": "",
+      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+      "dnd-inhibited-none": ""
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  }
 }

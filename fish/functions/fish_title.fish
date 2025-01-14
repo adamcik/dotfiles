@@ -3,6 +3,7 @@ function fish_title
     # argv[1] has the full command line
     echo (hostname): (pwd): $argv[1]
 
+    # TODO: Remove this since I hardly ever use screen these days?
     switch "$TERM"
     case 'screen*'
 

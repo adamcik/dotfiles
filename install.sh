@@ -37,7 +37,10 @@ _symlink() {
   DIRECTORY="$(dirname "${LINK_NAME}")"
 
   # Create directory if missing:
-  test -d "${DIRECTORY}" || ${RUN} mkdir -p "${DIRECTORY}"
+  test -d "${DIRECTORY}" || ${RUN} mkdir --parents "${DIRECTORY}"
+
+  # Lock down directories:
+  chmod 700 "${DIRECTORY}"
 
   # Backup before replacing:
   if [ ! -L "${LINK_NAME}" ] && [ -f "${LINK_NAME}" ]; then
@@ -104,6 +107,7 @@ if test -z "${SSH_TTY:-}"; then
   symlink ~/.config/kanshi/ ./kanshi/
   symlink ~/.config/kitty/ ./kitty/
   symlink ~/.config/sway/ ./sway/
+  symlink ~/.config/swaync/ ./swaync/
   symlink ~/.config/way-displays/ ./way-displays/
   symlink ~/.config/waybar/ ./waybar/
   symlink ~/.Xresources ./xresources
@@ -129,7 +133,3 @@ if test -z "${SSH_TTY:-}"; then
   printf "$ gpg2 --edit-key 9714F97B0CBEE929\ntrust\n^D\n"
   echo
 fi
-
-echo "Making sure .ssh and .gnupg are private."
-${RUN} chmod 700 ~/.ssh
-${RUN} chmod 700 ~/.gnupg
