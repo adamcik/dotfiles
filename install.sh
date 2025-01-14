@@ -97,8 +97,7 @@ echo
 
 # TODO: mise
 
-# FIXME: It seems this check breaks inside my tmux
-if test -z "${SSH_TTY:-}"; then
+if test -z "${SSH_CONNECTION:-}"; then
   echo Setting up desktop links:
   symlink ~/.config/foot/ ./foot/
   symlink ~/.config/ghostty/ ./ghostty/
