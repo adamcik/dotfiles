@@ -1,3 +1,24 @@
 [user]
 name = "Thomas Adamcik"
 email = "thomas@adamcik.no"
+
+[ui]
+default-command = "log"
+conflict-marker-style = "git"
+
+[revset-aliases]
+"empty()" = '''(empty() ~ merges() ~ root()) & description(exact:"")'''
+# TODO: Figure out how to add "squashed()"
+
+[templates]
+draft_commit_description = '''
+concat(
+  description,
+  surround(
+    "\nJJ: This commit contains the following changes:\n", "",
+    indent("JJ:     ", diff.stat(72)),
+  ),
+  "\nJJ: ignore-rest\n",
+  diff.git(),
+)
+'''
