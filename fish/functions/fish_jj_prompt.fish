@@ -12,8 +12,8 @@ function fish_jj_prompt --description 'Write out the jj prompt'
     # Generate prompt
     jj log --ignore-working-copy --no-graph --color always -r @ -T '
         surround(
-            " (",
-            ")",
+            " [",
+            "]",
             separate(
                 " ",
                 bookmarks.join(", "),
@@ -27,7 +27,7 @@ function fish_jj_prompt --description 'Write out the jj prompt'
                             description.first_line().substr(0, 23) ++ "…"
                         )
                     ),
-                    "(no description set)"
+                    "(no desc.)"
                 ),
                 change_id.shortest(),
                 commit_id.shortest(),
