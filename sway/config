@@ -190,6 +190,8 @@ for_window [window_role="GtkFiileChooserDialog"] move position center
 for_window [window_role="pop-up" title="^Meet - "] sticky enable
 for_window [window_role="pop-up" title="^Meet - "] inhibit_idle open
 
+for_window [app_id="pavucontrol"] floating enable
+
 # assign [class="chrome-work"] ...
 # assign [class="chrome-personal"] ...
 
@@ -238,6 +240,7 @@ bindsym ctrl+alt+l exec swaylock
 exec ~/.local/bin/sway-session
 
 # TODO: run this from systemctl session?
+# TODO: Figure out how to "reset" idle config once unpluged from power
 exec swayidle -w \
     timeout 300 'light -S 5' resume 'light -I' \
     timeout 360 'swaylock --daemonize' \
