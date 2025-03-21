@@ -1,15 +1,20 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/alex-courtis/way-displays/refs/heads/master/schema/cfg-1.0.0.yaml
+---
 ARRANGE: COLUMN
 ALIGN: MIDDLE
 ORDER:
-  - "!^DP-.*"
+  - '!^(DP|HDMI)-.*'
   - eDP-1
-SCALING: TRUE
-AUTO_SCALE: TRUE
+SCALING: true
+AUTO_SCALE: true
 AUTO_SCALE_MIN: 1
 AUTO_SCALE_MAX: -1
 SCALE:
   - NAME_DESC: eDP-1
     SCALE: 1.5
-  - NAME_DESC: "!^DP-.*"
-    SCALE: 1.5
-
+  - NAME_DESC: TV
+    SCALE: 2.5
+VRR_OFF:
+  - 'LG Ultra HD'
+  - 'L32p-30'
+  - '0x414B'
