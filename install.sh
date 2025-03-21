@@ -66,6 +66,7 @@ generate() {
 echo Setting up links:
 symlink ~/.config/fish/ ./fish/
 symlink ~/.config/jj/ ./jj/
+symlink ~/.config/starship.toml ./starship.toml
 symlink ~/.editorconfig ./editorconfig
 symlink ~/.gitconfig ./gitconfig
 symlink ~/.profile ./profile
@@ -95,7 +96,7 @@ echo $ apt install fish tmux neovim ripgrep
 echo $ dpkg-reconfigure locales
 echo
 
-# TODO: mise
+# TODO: mise: install neovim, jj, neovim...
 
 if test -z "${SSH_CONNECTION:-}"; then
   echo Setting up desktop links:

@@ -1,0 +1,39 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = true
+
+[custom.jj]
+command = "jj log -r@ -n1 --ignore-working-copy --no-graph --color always  -T prompt"
+when = "jj root --ignore-working-copy"
+style = ''
+
+[custom.jjstate]
+when = "jj root --ignore-working-copy"
+command = '''
+jj log -r@ -n1 --no-graph -T "" --stat | tail -n1 | sd "(\d+) files? changed, (\d+) insertions?\(\+\), (\d+) deletions?\(-\)" ' ${1}m ${2}+ ${3}-' | sd " 0." ""
+'''
+
+# optionally disable git modules
+[git_state]
+disabled = true
+
+[git_commit]
+disabled = true
+
+[git_metrics]
+disabled = true
+
+[git_branch]
+disabled = true
+
+[git_status]
+disabled = true
+
+[gcloud]
+disabled = true
+
+# re-enable git_branch as long as we're not in a jj repo
+[custom.git_branch]
+when = true
+command = "jj root >/dev/null 2>&1 || starship module git_branch"
+description = "Only show git_branch if we're not in a jj repo"
