@@ -69,9 +69,15 @@ menu,
 #pulseaudio,
 #systemd-failed-units,
 #temperature,
+#battery,
+#brightness,
+#idle_inhibitor,
+#custom-notification,
+#backlight,
 #tray {
     padding-left: 7px;
     padding-right: 7px;
+    border-left: 1px solid #464646;
 }
 
 
@@ -181,6 +187,10 @@ menu,
 #window {
 }
 
+#workspaces {
+    border-right: 1px solid #464646;
+}
+
 #workspaces button {
     border-top: 2px solid transparent;
     /* To compensate for the top border and still have vertical centering */
@@ -188,6 +198,7 @@ menu,
     padding-left: 7px;
     padding-right: 7px;
     color: #888888;
+
 }
 
 #workspaces button.focused {
