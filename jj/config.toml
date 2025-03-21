@@ -3,12 +3,39 @@ name = "Thomas Adamcik"
 email = "thomas@adamcik.no"
 
 [ui]
-default-command = "log"
-conflict-marker-style = "git"
+default-command = [
+  "log",
+  "-r",
+  "(present(@) | ancestors(immutable_heads().., 2) | present(trunk())) ~ archived",
+]
+#conflict-marker-style = "git"
+diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
 
 [revset-aliases]
 "empty()" = '''(empty() ~ merges() ~ root()) & description(exact:"")'''
+wip = "(description(glob:'wip:*') | description(glob:'WIP:*')) & mine()"
+"closest_bookmark(to)" = "heads(::to & bookmarks())"
+
+archived = "trunk()..bookmarks('archive/')"
 # TODO: Figure out how to add "squashed()"
+
+[git]
+private-commits = "description(glob:'wip:*') | description(glob:'WIP:*')"
+
+[aliases]
+list = ["log", "--no-graph"]
+prompt = [
+  "log",
+  "--ignore-working-copy",
+  "--no-graph",
+  "--color",
+  "always",
+  "-r",
+  "@",
+  "-T",
+  "prompt",
+]
+tug = ["bookmark", "move", "--from", "closest_bookmark(@-)", "--to", "@-"]
 
 [templates]
 draft_commit_description = '''
@@ -22,3 +49,49 @@ concat(
   diff.git(),
 )
 '''
+
+[template-aliases]
+prompt = '''
+surround(
+    " [",
+    "]",
+    separate(
+        " ",
+        bookmarks.join(", "),
+        coalesce(
+            surround(
+                "\"",
+                "\"",
+                if(
+                    description.first_line().substr(0, 24).starts_with(description.first_line()),
+                    description.first_line().substr(0, 24),
+                    description.first_line().substr(0, 23) ++ "…"
+                )
+            ),
+            "(no desc.)"
+        ),
+        change_id.shortest(),
+        commit_id.shortest(),
+        if(conflict, "(conflict)"),
+        if(empty, "(empty)"),
+        if(divergent, "(divergent)"),
+        if(hidden, "(hidden)"),
+    )
+)
+'''
+
+[merge-tools.diffconflicts]
+program = "nvim"
+merge-args = [
+  "-c",
+  "let g:jj_diffconflicts_marker_length=$marker_length",
+  "-c",
+  "JJDiffConflicts!",
+  "$output",
+  "$base",
+  "$left",
+  "$right",
+]
+merge-tool-edits-conflict-markers = true
+
+# TODO: Consider setting up jj fix?
