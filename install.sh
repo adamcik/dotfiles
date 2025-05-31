@@ -48,7 +48,7 @@ _symlink() {
       ${RUN} mv "${LINK_NAME}" "${LINK_NAME}.backup"
   fi
 
-  printf "~/%-40s → ~/%s\n" \
+  printf "~/%-50s → ~/%s\n" \
     "$(realpath --relative-base="$HOME" --no-symlinks "${LINK_NAME}")" \
     "$(realpath --relative-base="$HOME" --no-symlinks "${TARGET}")"
   ${RUN} ln --no-dereference --symbolic --force "${TARGET}" "${LINK_NAME}"
@@ -58,7 +58,7 @@ generate() {
   TARGET="$(realpath "$1")"
   shift
   if type -p "$1" >/dev/null; then
-    printf "$ %-40s → ~/%s\n" "$*" "$(realpath --relative-base="${HOME}" "${TARGET}")"
+    printf "$ %-50s → ~/%s\n" "$*" "$(realpath --relative-base="${HOME}" "${TARGET}")"
     "$@" >"${TARGET}"
   fi
 }
@@ -66,6 +66,7 @@ generate() {
 echo Setting up links:
 symlink ~/.config/fish/ ./fish/
 symlink ~/.config/jj/ ./jj/
+symlink ~/.config/starship.toml ./starship.toml
 symlink ~/.editorconfig ./editorconfig
 symlink ~/.gitconfig ./gitconfig
 symlink ~/.profile ./profile
@@ -95,10 +96,9 @@ echo $ apt install fish tmux neovim ripgrep
 echo $ dpkg-reconfigure locales
 echo
 
-# TODO: mise
+# TODO: mise: install neovim, jj, neovim...
 
-# FIXME: It seems this check breaks inside my tmux
-if test -z "${SSH_TTY:-}"; then
+if test -z "${SSH_CONNECTION:-}"; then
   echo Setting up desktop links:
   symlink ~/.config/foot/ ./foot/
   symlink ~/.config/ghostty/ ./ghostty/

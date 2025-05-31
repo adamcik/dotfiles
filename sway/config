@@ -4,24 +4,24 @@ set $down j
 set $up k
 set $right l
 
-set $term ghostty
+set $term ghostty || foot
 
 set $menu dmenu_path | bemenu \
+  -p 'run' \
   -H 30 \
-  -p '' \
   --hp 5 \
-  -fn  'Fira Code 12' \
-  --nb '#323232' \
-  --ab '#323232' \
-  --nf '#888888' \
-  --af '#888888' \
-  --fb '#323232' \
-  --hb '#323232' \
-  --hf '#ff757f' \
-  --cf '#FFFFFF' \
   --cw 1 \
   --ch 16 \
+  -fn  'Fira Code 12' \
+  --af '#888888' \
   --ff '#888888' \
+  --nf '#888888' \
+  --ab '#323232' \
+  --fb '#323232' \
+  --hb '#323232' \
+  --nb '#323232' \
+  --hf '#ff757f' \
+  --cf '#FFFFFF' \
   | xargs swaymsg exec --
 
 include /etc/sway/config-vars.d/*
@@ -176,6 +176,36 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="bubble"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="menu"] floating enable
+for_window [instance="update_installer"] floating enable
+
+for_window [window_role="GtkFileChooserDialog"] resize set 800 600
+for_window [window_role="GtkFiileChooserDialog"] move position center
+
+for_window [window_role="pop-up" title="^Meet - "] sticky enable
+for_window [window_role="pop-up" title="^Meet - "] inhibit_idle open
+
+for_window [app_id="pavucontrol"] floating enable
+
+# assign [class="chrome-work"] ...
+# assign [class="chrome-personal"] ...
+
+# TODO: Consider assign to workspace based on type etc?
+# - work/personal browser
+# - work/personal chat
+
+# TODO: Exec these at startup?
+# TODO: Chrome wrapper:
+#   - Handle one data-dir per name/profile
+#   - Set class based on name
+#   - xdg-open desktop entry picking name and calling wrapper
+#   - delete default data dir for chrome
+
 font pango:Fira Code 10
 
 input "*" {
@@ -184,7 +214,7 @@ input "*" {
 }
 
 bar {
-     swaybar_command waybar
+     # swaybar_command waybar
 }
 
 bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
@@ -209,6 +239,8 @@ bindsym ctrl+alt+l exec swaylock
 # TODO: See if we can trigger reload of e.g. kanshi service on reload?
 exec ~/.local/bin/sway-session
 
+# TODO: run this from systemctl session?
+# TODO: Figure out how to "reset" idle config once unpluged from power
 exec swayidle -w \
     timeout 300 'light -S 5' resume 'light -I' \
     timeout 360 'swaylock --daemonize' \

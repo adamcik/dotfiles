@@ -1,23 +1,29 @@
 function fish_prompt --description 'Write out the prompt'
     set -l last_pipestatus $pipestatus
     set -l last_status $status
-    set -l normal (set_color normal)
 
-    set -l user
+    echo -s
+
     if test $USER != "adamcik"
-    	set -l user (set_color $fish_color_user) "$USER" $normal @
+      echo -n -s (set_color $fish_color_user) "$USER" $n @
     end
 
-    set -l color_host $fish_color_host
-    if set -q SSH_TTY
-        set color_host $fish_color_host_remote
+    if set -q SSH_CONNECTION
+      echo -n -s (set_color $fish_color_host_remote)
+    else
+      echo -n -s (set_color $fish_color_host)
     end
 
-    set -l prompt_status (__fish_print_pipestatus " [" "]" "|" (set_color $fish_color_status) (set_color --bold $fish_color_status) $last_pipestatus)
+    echo -n -s (prompt_hostname) (set_color normal) ':' (set_color -o $color_cwd) (prompt_pwd)
+
+    echo -n -s (set_color normal) (fish_vcs_prompt)
 
     if set -q VIRTUAL_ENV
-      echo -n -s "[" (basename "$VIRTUAL_ENV") "] "
+      echo -n -s (set_color normal) " [" (basename "$VIRTUAL_ENV") "] "
     end
 
-    echo -n -s $user (set_color $color_host) (prompt_hostname) $normal ':' (set_color -o $color_cwd) (prompt_pwd) $normal (fish_vcs_prompt) $normal $prompt_status "> "
+    echo -n -s (set_color normal) (__fish_print_pipestatus " [" "]" "|" (set_color $fish_color_status) (set_color --bold $fish_color_status) $last_pipestatus)
+
+    echo -s
+    echo -n -s (set_color normal) '$ '
 end

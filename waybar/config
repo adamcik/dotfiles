@@ -75,15 +75,16 @@
     "tooltip": true
   },
   "clock#calendar": {
-    "format": "{:%Y-%m-%d W%W}",
+    "format": "{:%Y-%m-%d W%V}",
     "tooltip-format": "<tt>{calendar}</tt>",
+    "locale": "en_DK.utf8",
     "calendar": {
       "mode": "month",
       "mode-mon-col": 3,
       "weeks-pos": "left",
       "on-scroll": 1,
       "format": {
-        "weeks": "<span color='#c3e88d'>W{}</span>",
+        "weeks": "<span color='#c3e88d'>W{:%V}</span>",
         "weekdays": "<span color='#ffc777'>{}</span>",
         "today": "<span color='#c53b53'><b>{}</b></span>"
       }
@@ -152,19 +153,22 @@
   },
   "pulseaudio": {
     //"scroll-step": 1,
-    "format": "{icon} {volume}%",
+    "format": "{icon} {volume}% {format_source}",
     "format-bluetooth": "{icon} {volume}%",
-    "format-muted": "\udb83\ude08 0%",
+    "format-source": "",
+    "format-source-muted": "",
+    "format-muted": "󰸈 0% {format_source}",
     "format-icons": {
-      "headphones": "",
-      "handsfree": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
+      "headphones": "", // na-fa-headphones
+      "handsfree": "",  // na-fa-headset
+      "headset": "",    // na-fa-headset
+      "phone": "",      // na-fa-phone
+      "portable": "",   //
+      "car": "",        // na-fa-car
       "default": [
-        "",
-        ""
+        "",  // nf-fa-volume_off
+        "",  // nf-fa-volume_low
+        ""   // nf-fa-volume_high
       ]
     },
     "on-click": "pavucontrol"
