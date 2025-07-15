@@ -3,15 +3,12 @@
 add_newline = true
 
 [custom.jj]
-command = "jj log -r@ -n1 --ignore-working-copy --no-graph --color always  -T prompt"
-when = "jj root --ignore-working-copy"
-style = ''
-
-[custom.jjstate]
-when = "jj root --ignore-working-copy"
-command = '''
-jj log -r@ -n1 --no-graph -T "" --stat | tail -n1 | sd "(\d+) files? changed, (\d+) insertions?\(\+\), (\d+) deletions?\(-\)" ' ${1}m ${2}+ ${3}-' | sd " 0." ""
-'''
+command = "prompt"
+format = "$output"
+ignore_timeout = true
+shell = ["starship-jj", "--ignore-working-copy", "starship"]
+use_stdin = false
+when = true
 
 # optionally disable git modules
 [git_state]
