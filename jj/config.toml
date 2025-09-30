@@ -6,15 +6,18 @@ email = "thomas@adamcik.no"
 default-command = [
   "log",
   "-r",
-  "(present(@) | ancestors(immutable_heads().., 2) | present(trunk())) ~ archived",
+  "(present(@) | ancestors(immutable_heads().., 5) | present(trunk())) ~ archived",
 ]
 #conflict-marker-style = "git"
 diff-editor = ["nvim", "-c", "DiffEditor $left $right $output"]
+
+diff-formatter = ["difft", "--color=always", "$left", "$right"]
 
 [revset-aliases]
 "empty()" = '''(empty() ~ merges() ~ root()) & description(exact:"")'''
 wip = "(description(glob:'wip:*') | description(glob:'WIP:*')) & mine()"
 "closest_bookmark(to)" = "heads(::to & bookmarks())"
+"immutable_heads()" = "builtin_immutable_heads() | (trunk().. & ~mine())"
 
 archived = "trunk()..bookmarks('archive/')"
 # TODO: Figure out how to add "squashed()"
