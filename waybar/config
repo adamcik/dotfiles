@@ -25,6 +25,7 @@
   "modules-right": [
     "bluetooth",
     "network",
+    "disk",
     "memory",
     "cpu",
     "temperature",
@@ -98,7 +99,7 @@
     "tooltip-format": "<tt>{tz_list}</tt>",
     "timezones": [
       "",
-      // "Australia/Sydney",
+      "Australia/Sydney",
       "UTC",
       "Europe/Berlin",
       "America/New_York",
@@ -117,6 +118,15 @@
   "memory": {
     "interval": 5,
     "format": " {}%", // Icon: memory
+    "states": {
+      "warning": 70,
+      "critical": 90
+    }
+  },
+  "disk": {
+    "interval": 60,
+    "format": "󰋊 {specific_free:0.0f}GB",  // Icon: harddisk
+    "unit": "GB",
     "states": {
       "warning": 70,
       "critical": 90

@@ -62,6 +62,7 @@ menu,
 #bluetooth,
 #clock,
 #cpu,
+#disk,
 #custom-power,
 #memory,
 #mode,
@@ -118,6 +119,18 @@ menu,
 }
 
 #cpu.critical {
+    color: #c53b53;
+}
+
+#disk {
+  /* No styles */
+}
+
+#disk.warning {
+    color: #ff9e64;
+}
+
+#disk.critical {
     color: #c53b53;
 }
 
